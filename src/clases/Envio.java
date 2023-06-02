@@ -2,12 +2,12 @@ package clases;
 
 import java.util.Date;
 
-public class Envio {
+public class Envio implements Comparable<Envio>{
     /**
      * Este id debe de ser único por envio y permitirá a las personas
      * hacer seguimiento de su paquete y comunicarse con el repartidor o la oficina
      */
-    private String id;
+    private int id;
     /**
      * El estado refleja en que estado del proceso de entrega se encuentra el paquete.
      * Los valores van como sigue:
@@ -31,7 +31,7 @@ public class Envio {
     private Sucursal sucursalEntrega;
     private Direccion direccionEntrega;
 
-    public Envio(String id, int estado, Date fechaRecibido, Persona solicitante, Persona receptor, Paquete paquete, Sucursal sucursalRecibida, Sucursal sucursalEntrega, Direccion direccionEntrega) {
+    public Envio(int id, int estado, Date fechaRecibido, Persona solicitante, Persona receptor, Paquete paquete, Sucursal sucursalRecibida, Sucursal sucursalEntrega, Direccion direccionEntrega) {
         this.id = id;
         this.estado = estado;
         this.fechaRecibido = fechaRecibido;
@@ -43,11 +43,11 @@ public class Envio {
         this.direccionEntrega = direccionEntrega;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -113,5 +113,16 @@ public class Envio {
 
     public void setDireccionEntrega(Direccion direccionEntrega) {
         this.direccionEntrega = direccionEntrega;
+    }
+
+    @Override
+    public int compareTo(Envio o) {
+        if(this.id == o.getId()){
+            return 0;
+        }
+        if(this.id < o.getId()){
+            return 1;
+        }
+        return -1;
     }
 }

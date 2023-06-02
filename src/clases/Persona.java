@@ -1,6 +1,6 @@
 package clases;
 
-public class Persona {
+public class Persona{
     private String nombre;
     private String cedula;
     private String telefono;

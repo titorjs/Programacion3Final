@@ -1,4 +1,4 @@
-package interfaces;
+package interfaces.admin;
 
 public class PestañaAdministrador {
 }
