@@ -2,11 +2,12 @@ package interfaces;
 
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Inicio {
     private JPanel inicio;
+    private JTextField textField1;
+    private JPasswordField passwordField1;
+    private JButton ingresarButton;
 
     public Inicio() {
 
@@ -20,5 +21,6 @@ public class Inicio {
         frame.setSize(400, 700);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setResizable(false);
     }
 }
