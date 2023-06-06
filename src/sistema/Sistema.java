@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class Sistema {
     private ArrayList<Sucursal> sucursales;
 
+    /**
+     * En esta clase se manejará todas las funciones necesarias para la interfaz gráfica
+     */
     public Sistema(){
 
     }
