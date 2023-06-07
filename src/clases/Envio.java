@@ -29,6 +29,7 @@ public class Envio implements Comparable<Envio>{
     private Paquete paquete;
     private Sucursal sucursalRecibida;
     private Sucursal sucursalEntrega;
+    private Sucursal sucursalActual;
     private Direccion direccionEntrega;
 
     public Envio(int id, int estado, Date fechaRecibido, Persona solicitante, Persona receptor, Paquete paquete, Sucursal sucursalRecibida, Sucursal sucursalEntrega, Direccion direccionEntrega) {

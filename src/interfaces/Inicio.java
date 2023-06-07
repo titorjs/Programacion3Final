@@ -9,15 +9,19 @@ public class Inicio {
     private JPanel inicio;
     private JTextField textField1;
     private JPasswordField passwordField1;
-    private JButton ingresarButton;
-    private JButton soloQuieresVerUnButton;
-    private JButton eresEmpleadoClickAquíButton;
+    private JButton btnIngresar;
+    private JButton btnVerPaquete;
+    private JButton btnLoginEmpleado;
+    private JButton btnSolicitarCuenta;
     private AdminManejarUsuarios adminPanel;
 
     public Inicio() {
-        soloQuieresVerUnButton.addActionListener(new ActionListener() {
+        btnVerPaquete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                /**
+                 * Redirección a interfaz AdminManejarUsuarios
+                 */
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(inicio);
                 este.setContentPane(new AdminManejarUsuarios().getPanel());
                 este.revalidate();
@@ -25,17 +29,28 @@ public class Inicio {
         });
 
         /*
-        Aquí se maneja el ingreso para usuarios y el caso especial del admin
+        Aquí se maneja el ingreso para usuarios
          */
-        ingresarButton.addActionListener(new ActionListener() {
+        btnIngresar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
+        btnLoginEmpleado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /**
+                 * Redirección a interfaz LoginEmpleados
+                 */
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(inicio);
+                este.setContentPane(new LoginEmpleados().getPanel());
+                este.revalidate();
+            }
+        });
     }
 
-    public JPanel getInicio(){
+    public JPanel getPanel(){
         return inicio;
     }
 
@@ -47,7 +62,7 @@ public class Inicio {
         Sistema sistema = new Sistema();
 
         JFrame frame = new JFrame("Transcormogal");
-        frame.setContentPane(new Inicio().getInicio());
+        frame.setContentPane(new Inicio().getPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 700);
         frame.setLocationRelativeTo(null);

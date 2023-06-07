@@ -10,6 +10,7 @@ public class AdminManejarUsuarios{
     private JPanel ManejarUsuarios;
     private JButton button1;
     private JButton button2;
+    private JTabbedPane tabbedPane1;
     private Inicio inicio;
 
     public AdminManejarUsuarios() {
@@ -24,13 +25,11 @@ public class AdminManejarUsuarios{
     private void cambiarInicio() {
         inicio = new Inicio();
         JFrame este = (JFrame) SwingUtilities.getWindowAncestor(ManejarUsuarios);
-        este.setContentPane(inicio.getInicio());
+        este.setContentPane(inicio.getPanel());
         este.revalidate();
     }
 
     public JPanel getPanel(){
         return ManejarUsuarios;
     }
-
-
 }
