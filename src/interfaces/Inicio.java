@@ -31,7 +31,7 @@ public class Inicio {
             }
         });
         btnLoginEmpleado.addActionListener(new ActionListener() {
-            @Override
+                @Override
             public void actionPerformed(ActionEvent e) {
                 /**
                  * Redirección a interfaz LoginEmpleados
@@ -44,6 +44,7 @@ public class Inicio {
     }
 
     public JPanel getPanel(){
+
         return inicio;
     }
 
