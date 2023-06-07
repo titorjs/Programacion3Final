@@ -1,5 +1,4 @@
 package interfaces;
-import interfaces.admin.AdminManejarUsuarios;
 import sistema.Sistema;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,18 +12,12 @@ public class Inicio {
     private JButton btnVerPaquete;
     private JButton btnLoginEmpleado;
     private JButton btnSolicitarCuenta;
-    private AdminManejarUsuarios adminPanel;
 
     public Inicio() {
         btnVerPaquete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /**
-                 * Redirección a interfaz AdminManejarUsuarios
-                 */
-                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(inicio);
-                este.setContentPane(new AdminManejarUsuarios().getPanel());
-                este.revalidate();
+
             }
         });
 
