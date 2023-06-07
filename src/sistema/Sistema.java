@@ -65,7 +65,7 @@ public class Sistema {
         int comparacion = 0;
 
         /**
-         * Busqueda binaria usando el método estático de comparación de cédula de la clase persona
+         * Busqueda binaria usando el método estático de comparación de cédula de la clase Persona
          */
         while (inicio <= fin){
 

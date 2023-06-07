@@ -62,6 +62,15 @@ public class Persona implements Comparable<Persona>{
     }
 
     /**
+     * !!! Modificar método To string
+     * @return
+     */
+    @Override
+    public String toString() {
+        return nombre + " " + cedula;
+    }
+
+    /**
      * Método que se debe implementar para que el set funcione correctamente
      * @param o objeto a comparar
      * @return

@@ -161,7 +161,7 @@
                   </component>
                 </children>
               </grid>
-              <component id="c3dfe" class="javax.swing.JList" binding="list1" default-binding="true">
+              <component id="c3dfe" class="javax.swing.JList" binding="listaUsuarios">
                 <constraints>
                   <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>

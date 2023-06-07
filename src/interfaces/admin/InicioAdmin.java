@@ -3,6 +3,8 @@ package interfaces.admin;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.SortedSet;
+import clases.Persona;
 
 public class InicioAdmin {
     private JPanel inicioAdmin;
@@ -20,7 +22,7 @@ public class InicioAdmin {
     private JTextField txtFiltroCedula;
     private JPanel filtroCedula;
     private JTextField textField1;
-    private JList list1;
+    private JList listaUsuarios;
     private JButton btnBorrarFiltros;
     private JPanel filtroNombre;
 
@@ -42,7 +44,18 @@ public class InicioAdmin {
             /**
              * Actualizar la lista
              */
+
         }
     });
 }
+
+    /**
+     * Método para actualizar la lista
+     * @param lista lista con los
+     */
+    public void actualizarLista(SortedSet<Persona> lista){
+        DefaultListModel<Persona> modeloLista = new DefaultListModel<>();
+        modeloLista.addAll(0, lista);
+        listaUsuarios.setModel(modeloLista);
+    }
 }
