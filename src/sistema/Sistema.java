@@ -59,8 +59,53 @@ public class Sistema {
      * @return Un objeto de tipo Persona de encontrarse o null si no existe
      */
     public Persona buscarUsuarioCedula(String cedula){
+        int inicio = 0, fin = usuarios.size() - 1;
+        int medio = (inicio + fin)/2;
+        Persona aux;
+        int comparacion = 0;
+
+        /**
+         * Busqueda binaria usando el método estático de comparación de cédula de la clase persona
+         */
+        while (inicio <= fin){
+
+            medio = (inicio + fin)/2;
+            aux = (Persona)(usuarios.stream().toArray()[medio]);
+            comparacion = Persona.compararCedula(cedula, aux.getCedula());
+
+            if (comparacion == 0) {
+                return aux;
+            }
+            if(comparacion > 0){
+                inicio = medio + 1;
+            } else {
+                fin = medio - 1;
+            }
+        }
 
         return null;
+    }
+
+    /**
+     * Método para buscar por nombre, si contiene un nombre ignorando minúsculas y mayusculas,
+     * por ejemplo si se busca "to", la busque podría mostrar como resultado nombres como:
+     * "Tito" y "Tony"
+     * @param nombre nombre a buscar
+     * @return SortedSet de Persona con los matchs encontrados, o uno vació de no haber
+     */
+    public SortedSet<Persona> buscarUsuarioNombre(String nombre){
+        SortedSet<Persona> resultado = new TreeSet<>();
+
+        /**
+         * Verifica que el nombre contenga la palabra buscada, ignorando minúculas y mayúsculas
+         */
+        for (Persona p: usuarios){
+            if (p.getNombre().toLowerCase().contains(nombre.toLowerCase())){
+                resultado.add(p);
+            }
+        }
+
+        return resultado;
     }
 
     /**

@@ -1,6 +1,8 @@
 package interfaces.admin;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class InicioAdmin {
     private JPanel inicioAdmin;
@@ -20,4 +22,27 @@ public class InicioAdmin {
     private JTextField textField1;
     private JList list1;
     private JButton btnBorrarFiltros;
+    private JPanel filtroNombre;
+
+    public InicioAdmin() {
+    btnBorrarFiltros.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            /**
+             * Reiniciar los parámetros por defecto de las opciones de busqueda
+             */
+            cboFitroUsuarios.setSelectedIndex(-1);
+            filtroCedula.setVisible(false);
+            filtroCedula.setEnabled(false);
+            filtroTipoCuenta.setVisible(false);
+            filtroTipoCuenta.setEnabled(false);
+            filtroNombre.setVisible(false);
+            filtroNombre.setEnabled(false);
+
+            /**
+             * Actualizar la lista
+             */
+        }
+    });
+}
 }
