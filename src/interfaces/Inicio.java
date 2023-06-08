@@ -12,6 +12,7 @@ public class Inicio {
     private JButton btnVerPaquete;
     private JButton btnLoginEmpleado;
     private JButton btnSolicitarCuenta;
+    public static Sistema sistema;
 
     public Inicio() {
         btnVerPaquete.addActionListener(new ActionListener() {
@@ -53,7 +54,8 @@ public class Inicio {
          * A través de esta clase se manejarán todos los métodos y necesidades de la interfaz
          * gráfica
          */
-        Sistema sistema = new Sistema();
+
+        sistema = new Sistema();
 
         JFrame frame = new JFrame("Transcormogal");
         frame.setContentPane(new Inicio().getPanel());

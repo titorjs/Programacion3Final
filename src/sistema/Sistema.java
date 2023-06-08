@@ -15,6 +15,8 @@ public class Sistema {
     private ArrayList<Sucursal> sucursales;
     private SortedSet<Persona> usuarios;
 
+    private Persona admin;
+
     /**
      * En esta clase se manejará todas las funciones necesarias para la interfaz gráfica
      */
@@ -25,12 +27,23 @@ public class Sistema {
          */
         sucursales = new ArrayList<>();
         usuarios = new TreeSet<>();
+
+        /**
+         * Valores de prueba
+         */
+
+        admin = new Persona("Nombre del administrador","0000000000", "1234567890", "admin", TipoCuenta.ADMINISTRADOR);
     }
 
     /**
      * METODOS REFERENTES A MANEJO DE USUARIOS
      */
 
+    /**
+     *
+     * @param nuevo debe haberse validado previamente la contraseña
+     * @return
+     */
     public boolean agregarUsuario(Persona nuevo){
         return usuarios.add(nuevo);
     }
@@ -51,6 +64,10 @@ public class Sistema {
         }
 
         return resultado;
+    }
+
+    public SortedSet<Persona> getUsuarios() {
+        return usuarios;
     }
 
     /**
@@ -106,6 +123,10 @@ public class Sistema {
         }
 
         return resultado;
+    }
+
+    public boolean validarAdmin(String clave){
+        return admin.validarContrasenia(clave);
     }
 
     /**
