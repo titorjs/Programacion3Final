@@ -5,6 +5,11 @@ import javax.swing.*;
 public class inicioEstibaje {
 
     private JPanel principal;
+    private JLabel imgAvatar;
+    private JButton btnInterfazModificarEnvios;
+    private JButton btnEstadoPaquete;
+    private JButton btnListarPSucursal;
+    private JButton btnListaEnvios;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("inicioEstibaje");
