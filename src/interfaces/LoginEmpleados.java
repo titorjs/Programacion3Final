@@ -36,9 +36,9 @@ public class LoginEmpleados {
                 String usuario = txfUsuario.getText();
                 /**
                  * Inicio sesión admin
-                 * !!! Talvez se puede deshacer y unir con el de abajo
+                 * !!! Talvez se puede deshacer y unir con el de abajo o hacer que el admin solo sea un usuario más
                  */
-                if (usuario.equals("00000000")) {
+                if (usuario.equals("admin")) {
                     boolean validar = Inicio.sistema.validarAdmin(pswContrasenia.getText());
                     if (validar) {
                         /**

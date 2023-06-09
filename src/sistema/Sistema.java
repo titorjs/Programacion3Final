@@ -51,6 +51,11 @@ public class Sistema {
         return usuarios.add(nuevo);
     }
 
+    /** Elimina un usuario en base a la cédula */
+    public void eliminarUsuario(Persona p){
+        usuarios.remove(p);
+    }
+
     /**
      * Recorre los usuarios en el sistema y devuelve aquellos que son de cierto tipo específico,
      * puede ser un solo tipo o varios

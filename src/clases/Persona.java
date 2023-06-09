@@ -2,6 +2,8 @@ package clases;
 
 public class Persona implements Comparable<Persona>{
     private String nombre;
+    /** Para los admins, se usará un valor de cédula empezado en 50, ya que no están en el rango
+     * normal de cédulas */
     private String cedula;
     private String telefono;
     private String contrasenia;
@@ -67,7 +69,7 @@ public class Persona implements Comparable<Persona>{
      */
     @Override
     public String toString() {
-        return nombre + " " + cedula;
+        return nombre + " " + cedula + " " + tipo.name();
     }
 
     /**

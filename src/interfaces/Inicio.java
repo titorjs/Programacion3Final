@@ -30,7 +30,7 @@ public class Inicio {
         btnIngresar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                
             }
         });
         btnLoginEmpleado.addActionListener(new ActionListener() {
