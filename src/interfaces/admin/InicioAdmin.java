@@ -45,14 +45,17 @@ public class InicioAdmin {
 
     public InicioAdmin() {
 
+        /** Poner las opciones del combo box de tipo según las opciones existentes de
+         *  TipoCuenta */
         for (TipoCuenta tipo: TipoCuenta.values()){
             cboAgregarTipoCuenta.addItem(tipo.name());
         }
 
+        /** Inicializar los valores de la lista */
         borrarFiltrosBusqueda();
-
         actualizarLista(Inicio.sistema.getUsuarios());
 
+        /** Borrar filtros aplicados */
         btnBorrarFiltros.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,6 +67,8 @@ public class InicioAdmin {
                 actualizarLista(Inicio.sistema.getUsuarios());
             }
         });
+
+        /** Actualizar vista según selección del tipo de filtro */
         cboFiltroUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -107,12 +112,20 @@ public class InicioAdmin {
                 btnAplicarFiltro.setEnabled(true);
             }
         });
+
+        /** Agregar usuario */
         btnAgregarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (cboAgregarTipoCuenta.getSelectedIndex() > -1){
 
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione un tipo para el usuario");
+                }
             }
         });
+
+        /** Aplicar filtro de busqueda */
         btnAplicarFiltro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -123,7 +136,6 @@ public class InicioAdmin {
                      * Filtro con tipo cuenta
                      */
                     case 0:
-
                         /**
                          * Creación de la lista para el parámetro del filtro de búsqueda
                          */
@@ -169,7 +181,7 @@ public class InicioAdmin {
                                 JOptionPane.showMessageDialog(null, "La cédula ingresada no es válida");
                             }
                         } catch (Exception ex){
-                            JOptionPane.showMessageDialog(null, ex);
+                            JOptionPane.showMessageDialog(null, ex.getMessage());
                         }
 
                         break;
@@ -193,6 +205,22 @@ public class InicioAdmin {
                 }
             }
         });
+
+        /** Eliminar el usuario seleccionado */
+        eliminarUsuarioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        /** Modificar el usuario seleccionado */
+        modificarUsuarioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     /**
@@ -205,10 +233,10 @@ public class InicioAdmin {
         listaUsuarios.setModel(modeloLista);
     }
 
+    /**
+     * Reiniciar los parámetros por defecto de las opciones de busqueda
+     */
     private void borrarFiltrosBusqueda(){
-        /**
-         * Reiniciar los parámetros por defecto de las opciones de busqueda
-         */
         cboFiltroUsuarios.setSelectedIndex(-1);
         filtroCedula.setVisible(false);
         filtroCedula.setEnabled(false);
@@ -218,5 +246,9 @@ public class InicioAdmin {
         filtroNombre.setEnabled(false);
         btnBorrarFiltros.setEnabled(false);
         btnAplicarFiltro.setEnabled(false);
+    }
+
+    public JPanel getPanel() {
+        return inicioAdmin;
     }
 }

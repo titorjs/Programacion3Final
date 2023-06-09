@@ -1,5 +1,7 @@
 package interfaces;
+
 import sistema.Sistema;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,8 +24,8 @@ public class Inicio {
             }
         });
 
-        /*
-        Aquí se maneja el ingreso para usuarios
+        /**
+         * Aquí se maneja el ingreso para usuarios
          */
         btnIngresar.addActionListener(new ActionListener() {
             @Override
@@ -32,7 +34,7 @@ public class Inicio {
             }
         });
         btnLoginEmpleado.addActionListener(new ActionListener() {
-                @Override
+            @Override
             public void actionPerformed(ActionEvent e) {
                 /**
                  * Redirección a interfaz LoginEmpleados
@@ -44,7 +46,7 @@ public class Inicio {
         });
     }
 
-    public JPanel getPanel(){
+    public JPanel getPanel() {
 
         return inicio;
     }

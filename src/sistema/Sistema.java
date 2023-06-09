@@ -14,7 +14,9 @@ import clases.TipoCuenta;
 public class Sistema {
     private ArrayList<Sucursal> sucursales;
     private SortedSet<Persona> usuarios;
-
+    /**
+     * Siempre debe tener como cédula el valor 00000000
+     */
     private Persona admin;
 
     /**
@@ -29,10 +31,11 @@ public class Sistema {
         usuarios = new TreeSet<>();
 
         /**
-         * Valores de prueba
+         * !!! Valores de prueba
          */
 
         admin = new Persona("Nombre del administrador","0000000000", "1234567890", "admin", TipoCuenta.ADMINISTRADOR);
+        usuarios.add(new Persona("Tito Jaramillo", "2350999039", "+593 99669 3539", "1q2w3e4r",TipoCuenta.ESTIBAJE));
     }
 
     /**
@@ -125,9 +128,16 @@ public class Sistema {
         return resultado;
     }
 
+    /**
+     * Validar ingreso admin
+     * @param clave
+     * @return
+     */
     public boolean validarAdmin(String clave){
         return admin.validarContrasenia(clave);
     }
+
+
 
     /**
      * MÉTODOS PARA MANEJAR LAS SUCURSALES Y SUS ATRIBUTOS

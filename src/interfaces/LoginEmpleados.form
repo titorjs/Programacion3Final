@@ -39,7 +39,7 @@
           <text value="Usuario"/>
         </properties>
       </component>
-      <component id="1a037" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="1a037" class="javax.swing.JTextField" binding="txfUsuario">
         <constraints>
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -55,7 +55,7 @@
           <text value="Contraseña"/>
         </properties>
       </component>
-      <component id="a95f7" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+      <component id="a95f7" class="javax.swing.JPasswordField" binding="pswContrasenia">
         <constraints>
           <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -63,7 +63,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="9a3ac" class="javax.swing.JButton" binding="ingresarButton" default-binding="true">
+      <component id="9a3ac" class="javax.swing.JButton" binding="btnIngresar">
         <constraints>
           <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -71,7 +71,7 @@
           <text value="Ingresar"/>
         </properties>
       </component>
-      <component id="6338e" class="javax.swing.JButton" binding="volverALaPáginaButton" default-binding="true">
+      <component id="6338e" class="javax.swing.JButton" binding="btnVolverInicio">
         <constraints>
           <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
