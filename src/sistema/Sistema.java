@@ -1,7 +1,9 @@
 package sistema;
+import clases.Envio;
 import clases.Sucursal;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -14,6 +16,8 @@ import clases.TipoCuenta;
 public class Sistema {
     private ArrayList<Sucursal> sucursales;
     private SortedSet<Persona> usuarios;
+
+    private SortedSet<Envio> envios;
     /**
      * Siempre debe tener como cédula el valor 00000000
      */
@@ -31,11 +35,14 @@ public class Sistema {
         usuarios = new TreeSet<>();
 
         /**
-         * !!! Valores de prueba, usuarios para ingresar a las diferentes pestañas. Agregar en caso de necesitar
+         * !!! Valores de prueba
          */
 
         admin = new Persona("Nombre del administrador","0000000000", "1234567890", "admin", TipoCuenta.ADMINISTRADOR);
         usuarios.add(new Persona("Tito Jaramillo", "2350999039", "0996693539", "1q2w3e4r",TipoCuenta.ESTIBAJE));
+        usuarios.add(new Persona("Maria","1010101010","123456789","enviador",TipoCuenta.USUARIO));
+        usuarios.add(new Persona("Pedro","1010101020","123456789","receptor",TipoCuenta.USUARIO));
+        //envios.add(new Envio(1,0, "10/20/2023",))
     }
 
     /**
