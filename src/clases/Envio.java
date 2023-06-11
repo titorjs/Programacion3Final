@@ -44,6 +44,7 @@ public class Envio implements Comparable<Envio>{
         this.direccionEntrega = direccionEntrega;
     }
 
+
     public int getId() {
         return id;
     }
