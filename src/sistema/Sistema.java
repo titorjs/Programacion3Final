@@ -155,4 +155,26 @@ public class Sistema {
     /**
      * MÉTODOS PARA MANEJAR LAS SUCURSALES Y SUS ATRIBUTOS
      */
+
+    /**
+     * METODOS REFERENTES A MANEJO DE ENVIOS
+     */
+
+    public Envio buscarEnvio(Integer numCodigo){
+        int inferior, superior, centro;
+        inferior=0;
+        superior=envios.size()-1;
+        while(inferior<=superior){
+            centro=(inferior+superior)/2;
+            Envio envio=(Envio) envios.toArray()[centro];
+            if(numCodigo==envio.getCodigo())
+                return envio;
+            if(numCodigo<envio.getCodigo()){
+                superior=centro-1;
+            }else{
+                inferior=centro+1;
+            }
+        }
+        return null;
+    }
 }

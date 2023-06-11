@@ -1,7 +1,5 @@
 package interfaces.estibaje;
 
-import interfaces.LoginEmpleados;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,13 +8,14 @@ public class PestañaModDireccion {
     private JTextField txtCx;
     private JTextField txtCy;
     private JButton btnCambiarDireccion;
-    private JButton btnRPModEnvios;
+    private JButton btnDiraModEnvios;
     private JPanel jpPestañaModDireccion;
 
     public PestañaModDireccion() {
-        btnRPModEnvios.addActionListener(new ActionListener() {
-            /*
-                Redireccion a la Pestaña de Modificar Envios
+        btnDiraModEnvios.addActionListener(new ActionListener() {
+            /**
+             * BOTON PARA REGRESAR A LA PESTAÑA DE ENVIOS ESTIBAJE
+             * @param e the event to be processed
              */
             @Override
             public void actionPerformed(ActionEvent e) {
