@@ -4,6 +4,8 @@ import clases.Persona;
 import clases.TipoCuenta;
 import interfaces.Inicio;
 import sistema.Validaciones;
+import clases.Envio;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +23,7 @@ public class PestañaModReceptor {
     private JButton btnRecaEnvios2;
     private ModEnviosEstibaje modEnviosEstibaje;
 
-    public PestañaModReceptor() {
+    public PestañaModReceptor(Envio envio) {
         /**
          * Botones para redireccionar a Pestaña de Modifcar envios
          */
@@ -51,19 +53,26 @@ public class PestañaModReceptor {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
-                    boolean cedulaV=Validaciones.cedulaValida(txtModCedulaNReceptor.getText());
-                    if (cedulaV){
-                        txtModCedulaNReceptor.setText("");
+                try {
+                    boolean cedulaV = Validaciones.cedulaValida(txtModCedulaNReceptor.getText());
+                    if (cedulaV) {
+                        Persona aux = Inicio.sistema.buscarUsuarioCedula(txtModCedulaNReceptor.getText());
+                        if (aux != null) {
+                            boolean cambio = JOptionPane.showOptionDialog(null, "Es este el usuario por el que desea cambiar?\n" +
+                                    aux.toString(), "Confirmar usuario", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null) == 0;
+                            if (cambio) {
+                                modEnviosEstibaje.getEnvioDeModEnvios().setReceptor(aux);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Se canceló el cambio de receptor");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No existe el usuario");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null , "Cédula ingresada inválida");
                     }
-                }catch (Exception exception){
-                    JOptionPane.showMessageDialog(null,exception);
-                }
-                //Se modifica el envio con la nueva persona
-                if (Inicio.sistema.buscarUsuarioCedula(txtModCedulaNReceptor.getText())!=null){
-                    modEnviosEstibaje.getEnvioDeModEnvios().setReceptor(Inicio.sistema.buscarUsuarioCedula(txtModCedulaNReceptor.getText()));
-                }else {
-                    JOptionPane.showMessageDialog(null,"No existe el usuario");
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
                 }
             }
         });
@@ -75,25 +84,18 @@ public class PestañaModReceptor {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Validamos la cedula
-                try{
-                    boolean cedulaV=Validaciones.cedulaValida(txtCedulaTemporal.getText());
-                    if (cedulaV){
-                        txtCedulaTemporal.setText("");
-                    }
-                }catch (Exception exception){
-                    JOptionPane.showMessageDialog(null,exception);
-                }
-                //Validamos el telefono
                 try {
-                    boolean telefonoV=Validaciones.validarTelefono(txtTelefonoTemporal.getText());
-                    if (telefonoV){
-                        return;
+                    boolean cedulaV = Validaciones.cedulaValida(txtCedulaTemporal.getText());
+                    if (cedulaV) {
+                        boolean telefonoV = Validaciones.validarTelefono(txtTelefonoTemporal.getText());
+                        if (telefonoV) {
+                            Persona personaTemporal = new Persona(txtNombreTemporal.getText(), txtCedulaTemporal.getText(), txtTelefonoTemporal.getText(), "", TipoCuenta.USUARIO);
+                            envio.setReceptor(personaTemporal);
+                        }
                     }
-                }catch (Exception exception1){
-                    JOptionPane.showMessageDialog(null,exception1);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, exception);
                 }
-                Persona personaTemporal= new Persona(txtNombreTemporal.getText(),txtCedulaTemporal.getText(),txtTelefonoTemporal.getText(),"", TipoCuenta.USUARIO);
-                Inicio.sistema.modificarPersona(personaTemporal,modEnviosEstibaje.getEnvioDeModEnvios());
             }
         });
 

@@ -38,6 +38,15 @@ public class Camion implements Comparable<Camion>{
     }
 
     @Override
+    public String toString() {
+        return "Camion{" +
+                "id=" + id +
+                ", carga=" + carga +
+                ", conductor=" + conductor +
+                '}';
+    }
+
+    @Override
     public int compareTo(Camion o) {
         return id-o.id;
     }

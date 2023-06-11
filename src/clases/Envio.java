@@ -1,6 +1,6 @@
 package clases;
 
-import java.util.Date;
+import java.time.*;
 
 public class Envio implements Comparable<Envio>{
     /**
@@ -19,7 +19,7 @@ public class Envio implements Comparable<Envio>{
      *  5. Entregado
      */
     private int estado;
-    private Date fechaRecibido;
+    private LocalDateTime fechaRecibido;
     /**
      * Tanto el solicitante como el receptor pueden ser personas no registradas en la base
      * en cuyo caso solo se mostrará la información y no habrá chat
@@ -31,7 +31,7 @@ public class Envio implements Comparable<Envio>{
     private Sucursal sucursalEntrega;
     private Direccion direccionEntrega;
 
-    public Envio(int id, int estado, Date fechaRecibido, Persona solicitante, Persona receptor, Paquete paquete, Sucursal sucursalRecibida, Sucursal sucursalEntrega, Direccion direccionEntrega) {
+    public Envio(int id, int estado, LocalDateTime fechaRecibido, Persona solicitante, Persona receptor, Paquete paquete, Sucursal sucursalRecibida, Sucursal sucursalEntrega, Direccion direccionEntrega) {
         this.id = id;
         this.estado = estado;
         this.fechaRecibido = fechaRecibido;
@@ -60,11 +60,11 @@ public class Envio implements Comparable<Envio>{
         this.estado = estado;
     }
 
-    public Date getFechaRecibido() {
+    public LocalDateTime getFechaRecibido() {
         return fechaRecibido;
     }
 
-    public void setFechaRecibido(Date fechaRecibido) {
+    public void setFechaRecibido(LocalDateTime fechaRecibido) {
         this.fechaRecibido = fechaRecibido;
     }
 

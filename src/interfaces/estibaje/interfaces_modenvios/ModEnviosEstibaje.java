@@ -21,6 +21,10 @@ public class ModEnviosEstibaje {
     private Envio envio;
 
     public ModEnviosEstibaje() {
+        /** !!! Hacer que si el paquete a modificar es null, no sea visible los botones */
+
+        envio = null;
+
         /**
          * Redireccion a la interfaz Inicio Estibaje
          */
@@ -41,27 +45,25 @@ public class ModEnviosEstibaje {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                envio = Inicio.sistema.buscarEnvio(Integer.parseInt(txtBuscarEnvio.getText()));
+
                 /**
                  * Se valida el estado en el que se encuentra el envio
                  */
-                if (Inicio.sistema.buscarEnvio(Integer.parseInt(txtBuscarEnvio.getText())).getEstado()>=4){
+                if (envio.getEstado() >= 4) {
                     int opcion = JOptionPane.showOptionDialog(
                             null, "No es posible realizar cambios,¿desea crear un nuevo envio?",
-                            "Confirmacion",JOptionPane.YES_NO_OPTION,
+                            "Confirmacion", JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE, null, null, null);
-                    if (opcion == JOptionPane.YES_OPTION){
-                        //Redirigir a una nueva pestaña para crear envios
-                    } else {
-                        JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                        este.setContentPane(new ModEnviosEstibaje().getPanel());
-                        este.revalidate();
+                    if (opcion == JOptionPane.YES_OPTION) {
+                        /**Redirigir a una nueva pestaña para crear envios y
+                         * tomar como base el pedido anterior que se cancela */
                     }
                     /**
                      * En caso de que sea posible modificar se muestra la informacion del paquete
                      * en el textArea.
-                      */
+                     */
                 } else {
-                    envio = Inicio.sistema.buscarEnvio(Integer.parseInt(txtBuscarEnvio.getText()));
                     txtAInfoEnvio.setText(envio.toString());
                 }
             }
@@ -73,7 +75,7 @@ public class ModEnviosEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                este.setContentPane(new PestañaModReceptor().getJpPestañaModReceptor());
+                este.setContentPane(new PestañaModReceptor(envio).getJpPestañaModReceptor());
                 este.revalidate();
             }
         });
@@ -84,7 +86,7 @@ public class ModEnviosEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                este.setContentPane(new PestañaModDireccion().getJpPestañaModDireccion());
+                este.setContentPane(new PestañaModDireccion(envio).getJpPestañaModDireccion());
                 este.revalidate();
             }
         });
@@ -104,12 +106,14 @@ public class ModEnviosEstibaje {
 
     /**
      * Metodo get del panel
+     *
      * @return El panel en el que estemos
      */
-    public JPanel getPanel(){
+    public JPanel getPanel() {
         return jpModEnviosEstibaje;
     }
-    public Envio getEnvioDeModEnvios(){
+
+    public Envio getEnvioDeModEnvios() {
         return envio;
     }
 

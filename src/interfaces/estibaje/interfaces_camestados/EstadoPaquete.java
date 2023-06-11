@@ -19,6 +19,7 @@ public class EstadoPaquete {
     private JButton btnCamEstadoaInicio;
 
     public EstadoPaquete() {
+        /** !!! visualización de información de envio antes de modificar estado */
         btnCamEstadoaInicio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

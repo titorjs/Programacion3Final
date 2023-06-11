@@ -1,6 +1,7 @@
 package interfaces.estibaje.interfaces_modenvios;
 
 import clases.Direccion;
+import clases.Envio;
 import interfaces.Inicio;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class PestañaModDireccion {
     private JPanel jpPestañaModDireccion;
     private ModEnviosEstibaje modEnviosEstibaje;
 
-    public PestañaModDireccion() {
+    public PestañaModDireccion(Envio envio) {
         btnDiraModEnvios.addActionListener(new ActionListener() {
             /**
              * Redireccion a la pestaña de modificar envios
@@ -35,7 +36,7 @@ public class PestañaModDireccion {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Direccion d = new Direccion(Double.parseDouble(txtCx.getText()),Double.parseDouble(txtCy.getText()));
-                Inicio.sistema.modificarDireccion(d,modEnviosEstibaje.getEnvioDeModEnvios());
+                envio.setDireccionEntrega(d);
             }
         });
     }

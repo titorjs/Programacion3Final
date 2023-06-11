@@ -1,10 +1,9 @@
 package sistema;
 import clases.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * Clase para el manejo de las funcionalidades del sistema
@@ -31,11 +30,16 @@ public class Sistema {
         sucursales = new ArrayList<>();
         usuarios = new TreeSet<>();
         empleadosQS=new ArrayList<>();
+        envios = new TreeSet<>();
+        camiones = new TreeSet<>();
 
         /**
          * !!! Valores de prueba
          */
         Date fechaActual=new Date();
+        fechaActual.setTime(GregorianCalendar.DAY_OF_YEAR);
+
+        GregorianCalendar g = new GregorianCalendar();
 
         admin = new Persona("Nombre del administrador","0000000000", "1234567890", "admin", TipoCuenta.ADMINISTRADOR);
         Persona maria =new Persona("Maria","1010101010","123456789","enviador",TipoCuenta.USUARIO);
@@ -48,12 +52,18 @@ public class Sistema {
         usuarios.add(pedro);
         usuarios.add(carlos);
         empleadosQS.add(buscarUsuarioCedula("2350999039"));
-        Sucursal sQuitoS = new Sucursal(new Direccion(5,5),envios,Sucursales.UIO_S,empleadosQS);
-        Sucursal sGuayaquil = new Sucursal(new Direccion(10,10),envios,Sucursales.GYE,empleadosQS);
-        Sucursal sQuitoN= new Sucursal(new Direccion(6,6),envios,Sucursales.UIO_N,empleadosQS);
-        Sucursal sStoDomingo = new Sucursal(new Direccion(15,15),envios,Sucursales.STO_DGO,empleadosQS);
-        envios.add(new Envio(1,0, fechaActual,maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5)));
-        Camion camion = new Camion(1,envios,carlos);
+        Sucursal sQuitoS = new Sucursal(new Direccion(5,5),new TreeSet<>(),Sucursales.UIO_S,empleadosQS);
+        Sucursal sGuayaquil = new Sucursal(new Direccion(10,10),new TreeSet<>(),Sucursales.GYE,empleadosQS);
+        Sucursal sQuitoN= new Sucursal(new Direccion(6,6),new TreeSet<>(),Sucursales.UIO_N,empleadosQS);
+        Sucursal sStoDomingo = new Sucursal(new Direccion(15,15),new TreeSet<>(),Sucursales.STO_DGO,empleadosQS);
+        envios.add(new Envio(1,0, LocalDateTime.now(),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5)));
+        envios.add(new Envio(2,0, LocalDateTime.of(2004, 12, 1, 12, 35, 34,4),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5)));
+        Camion camion = new Camion(1,new TreeSet(), carlos);
+        Camion camion2 = new Camion(2,new TreeSet(), pedro);
+        camiones.add(camion2);
+        camiones.add(camion);
+
+
         sucursales.add(sQuitoN);
         sucursales.add(sQuitoS);
         sucursales.add(sGuayaquil);
