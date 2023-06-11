@@ -31,11 +31,11 @@ public class Sistema {
         usuarios = new TreeSet<>();
 
         /**
-         * !!! Valores de prueba
+         * !!! Valores de prueba, usuarios para ingresar a las diferentes pestañas. Agregar en caso de necesitar
          */
 
         admin = new Persona("Nombre del administrador","0000000000", "1234567890", "admin", TipoCuenta.ADMINISTRADOR);
-        usuarios.add(new Persona("Tito Jaramillo", "2350999039", "+593 99669 3539", "1q2w3e4r",TipoCuenta.ESTIBAJE));
+        usuarios.add(new Persona("Tito Jaramillo", "2350999039", "0996693539", "1q2w3e4r",TipoCuenta.ESTIBAJE));
     }
 
     /**
