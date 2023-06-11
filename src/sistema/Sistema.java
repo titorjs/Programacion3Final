@@ -1,14 +1,10 @@
 package sistema;
-import clases.Envio;
-import clases.Sucursal;
+import clases.*;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import clases.Persona;
-import clases.TipoCuenta;
 
 /**
  * Clase para el manejo de las funcionalidades del sistema
@@ -16,8 +12,9 @@ import clases.TipoCuenta;
 public class Sistema {
     private ArrayList<Sucursal> sucursales;
     private SortedSet<Persona> usuarios;
-
+    private ArrayList<Persona> empleadosQS;
     private SortedSet<Envio> envios;
+    private SortedSet<Camion> camiones;
     /**
      * Siempre debe tener como cédula el valor 00000000
      */
@@ -33,16 +30,35 @@ public class Sistema {
          */
         sucursales = new ArrayList<>();
         usuarios = new TreeSet<>();
+        empleadosQS=new ArrayList<>();
 
         /**
          * !!! Valores de prueba
          */
+        Date fechaActual=new Date();
 
         admin = new Persona("Nombre del administrador","0000000000", "1234567890", "admin", TipoCuenta.ADMINISTRADOR);
+        Persona maria =new Persona("Maria","1010101010","123456789","enviador",TipoCuenta.USUARIO);
+        Persona pedro = new Persona("Pedro","1010101020","123456789","receptor",TipoCuenta.USUARIO);
+        Persona carlos = new Persona("Carlos","1010101030","123456789","conductor",TipoCuenta.CONDUCTOR);
+
+        Paquete p1 = new Paquete(new Dimension(10,10,10,10),"Paquete Prueba");
         usuarios.add(new Persona("Tito Jaramillo", "2350999039", "0996693539", "1q2w3e4r",TipoCuenta.ESTIBAJE));
-        usuarios.add(new Persona("Maria","1010101010","123456789","enviador",TipoCuenta.USUARIO));
-        usuarios.add(new Persona("Pedro","1010101020","123456789","receptor",TipoCuenta.USUARIO));
-        //envios.add(new Envio(1,0, "10/20/2023",))
+        usuarios.add(maria);
+        usuarios.add(pedro);
+        usuarios.add(carlos);
+        empleadosQS.add(buscarUsuarioCedula("2350999039"));
+        Sucursal sQuitoS = new Sucursal(new Direccion(5,5),envios,Sucursales.UIO_S,empleadosQS);
+        Sucursal sGuayaquil = new Sucursal(new Direccion(10,10),envios,Sucursales.GYE,empleadosQS);
+        Sucursal sQuitoN= new Sucursal(new Direccion(6,6),envios,Sucursales.UIO_N,empleadosQS);
+        Sucursal sStoDomingo = new Sucursal(new Direccion(15,15),envios,Sucursales.STO_DGO,empleadosQS);
+        envios.add(new Envio(1,0, fechaActual,maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5)));
+        Camion camion = new Camion(1,envios,carlos);
+        sucursales.add(sQuitoN);
+        sucursales.add(sQuitoS);
+        sucursales.add(sGuayaquil);
+        sucursales.add(sStoDomingo);
+
     }
 
     /**
@@ -152,13 +168,14 @@ public class Sistema {
 
 
     /**
-     * MÉTODOS PARA MANEJAR LAS SUCURSALES Y SUS ATRIBUTOS
+     * METODOS REFERENTES A MANEJO DE ENVIOS Y SUCURSALES
      */
 
     /**
-     * METODOS REFERENTES A MANEJO DE ENVIOS
+     * Metodo busqueda binaria para encontrar un envio mediante el codigo
+     * @param numCodigo
+     * @return
      */
-
     public Envio buscarEnvio(Integer numCodigo){
         int inferior, superior, centro;
         inferior=0;
@@ -166,9 +183,9 @@ public class Sistema {
         while(inferior<=superior){
             centro=(inferior+superior)/2;
             Envio envio=(Envio) envios.toArray()[centro];
-            if(numCodigo==envio.getCodigo())
+            if(numCodigo==envio.getId())
                 return envio;
-            if(numCodigo<envio.getCodigo()){
+            if(numCodigo<envio.getId()){
                 superior=centro-1;
             }else{
                 inferior=centro+1;
@@ -176,4 +193,169 @@ public class Sistema {
         }
         return null;
     }
+
+    /**
+     * Metodo para saber en que sucursal esta un envio mediante el codigo
+     * @param numCodigo Codigo del envio que se quiere encontrar
+     * @return retorna la sucursal en la que se encuentra si es que encuentra y null
+     * si el envio no esta en ningua sucursal
+     */
+    public Sucursal buscarSucursalePaquete(int numCodigo){
+        for (Sucursal s:sucursales){
+            if (buscarEnvio(numCodigo)!=null){
+                return s;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Metodo para obtener la lista de sucursales
+     * @return sucursales
+     */
+    public ArrayList<Sucursal> getSucursales(){
+        return sucursales;
+    }
+
+    /**
+     * Metodo para agregar envio y agregar a la sucursal comparando la zona
+     * @param e
+     * @param nombreS
+     */
+    public void agregarEnvio(Envio e,String nombreS){
+        envios.add(e);
+        for (Sucursal s: sucursales){
+            if (s.getZona().equals(Sucursales.valueOf(nombreS))){
+                s.getInventario().add(e);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Metodo para remover el envio de la lista y removerlo de la lista de la
+     * sucursal correspondiente
+     * @param e significa el apuntador de envio a modificar bobo quien lo lea
+     */
+    public void removerEnvio(Envio e){
+        envios.remove(e);
+        for (Sucursal s: sucursales){
+            if (s.getZona().equals(buscarSucursalePaquete(e.getId()))){
+                s.getInventario().remove(e);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Metodo para cambiar el estado del envio que comprueba el String del combobox para poder
+     * asignar un numero entero asignado anteriormente
+     *      *  0. Se debe retirar en el domicilio del cliente
+     *      *  1. Se recibió en oficina
+     *      *  2. Enviandose a la sucursal correcta
+     *      *  3. En sucursal correcta
+     *      *  4. En curso a domicilio(En marcha)
+     *      *  5. Entregado
+     * @param e El envio que se va a cambiar el estado
+     * @param estado El String del comboBox para poder asignar
+     */
+    public void cambiarEstado(Envio e,String estado){
+        int cambio;
+        if (estado.compareToIgnoreCase("Enviandose a la sucursal correcta")==0){
+            cambio=2;
+        } else if (estado.compareToIgnoreCase("En sucursal correcta")==0) {
+            cambio=3;
+        } else if (estado.compareToIgnoreCase("En curso a domicilio")==0) {
+            cambio=4;
+        } else  {
+            cambio=5;
+        }
+        e.setEstado(cambio);
+    }
+
+    /**
+     * Metodo para Modificar la persona receptora del envio
+     * @param p Persona ya existente que se busca con el metodo de buscar usuario por cedula
+     *          en caso de no existir se crea una nueva persona, pero esto se realiza en
+     *          interfaz.
+     * @param e El envio al cual se va a modificar
+     */
+    public void modificarPersona(Persona p, Envio e){
+        e.setReceptor(p);
+    }
+
+    /**
+     * Metodo para modificar la direccion del envio
+     * @param d Direccion nueva que se ingresa
+     * @param e Envio al cual se a modificar
+     */
+    public void modificarDireccion(Direccion d,Envio e){
+        e.setDireccionEntrega(d);
+    }
+
+    /**
+     * Metodo para modificar el paquete del envio
+     * @param p Paquete nuevo que se ingresa
+     * @param e Envio al cual se va a modificar
+     */
+    public void modificarPaquete(Paquete p,Envio e){
+        e.setPaquete(p);
+    }
+
+    /**
+     * Metodo para cambiar la sucursal de entrega, ademas cambia el estado dependiendo de lo siguiente:
+     * Primero se utiliza el metodo buscarSucursal que devuelve la sucursal donde se encuentra el envio
+     * luego se compara:
+     * Si el envio esta en la sucursal de entrega entonces el estado cambia a 3(En sucursal correcta) y
+     * si no esta cambia el estado a 2(Enviandose a la sucursal correcta)
+     * @param s La sucursal que se quiere cambiar
+     * @param e El envio al cual se va a modificar la sucursal
+     */
+    public void cambiarSucursalEntrega(Sucursal s,Envio e){
+        e.setSucursalEntrega(s);
+        if (buscarSucursalePaquete(e.getId())==e.getSucursalEntrega()){
+            e.setEstado(3);
+        } else  {
+            e.setEstado(2);
+        }
+    }
+
+
+    public void generarListaEnviosSucursal(int idCamion){
+
+    }
+    public void generarListaEnviosEntrega(int idCamion){
+
+    }
+    /**
+     * !!!TEMPORAL
+     * METODOS PARA MANEJAR CAMIONES
+     */
+
+    /**
+     * Metodo para buscar camion en especifico
+     * @param numCodigo Codigo para encontrar el camion deseado
+     * @return Un camion y null si no lo encuentra
+     */
+    public Camion buscarCamion(int numCodigo){
+        int inferior, superior, centro;
+        inferior=0;
+        superior=camiones.size()-1;
+        while(inferior<=superior){
+            centro=(inferior+superior)/2;
+            Camion camion=(Camion) camiones.toArray()[centro];
+            if(numCodigo==camion.getId())
+                return camion;
+            if(numCodigo<camion.getId()){
+                superior=centro-1;
+            }else{
+                inferior=centro+1;
+            }
+        }
+        return null;
+    }
+    public void agregarEnvioCamion(){
+
+    }
+
 }

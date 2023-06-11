@@ -15,7 +15,7 @@ public class Envio implements Comparable<Envio>{
      *  1. Se recibió en oficina
      *  2. Enviandose a la sucursal correcta
      *  3. En sucursal correcta
-     *  4. En curso a domicilio
+     *  4. En curso a domicilio(En marcha)
      *  5. Entregado
      */
     private int estado;
@@ -29,7 +29,6 @@ public class Envio implements Comparable<Envio>{
     private Paquete paquete;
     private Sucursal sucursalRecibida;
     private Sucursal sucursalEntrega;
-    private Sucursal sucursalActual;
     private Direccion direccionEntrega;
 
     public Envio(int id, int estado, Date fechaRecibido, Persona solicitante, Persona receptor, Paquete paquete, Sucursal sucursalRecibida, Sucursal sucursalEntrega, Direccion direccionEntrega) {
@@ -115,6 +114,20 @@ public class Envio implements Comparable<Envio>{
 
     public void setDireccionEntrega(Direccion direccionEntrega) {
         this.direccionEntrega = direccionEntrega;
+    }
+
+    @Override
+    public String toString() {
+        return "Envio" +
+                "\nID: " + id +
+                "\nestado: " + estado +
+                "\nfechaRecibido: " + fechaRecibido +
+                "\nsolicitante: " + solicitante +
+                "\nreceptor: " + receptor +
+                "\npaquete: " + paquete +
+                "\nsucursalRecibida: " + sucursalRecibida +
+                "\nsucursalEntrega: " + sucursalEntrega +
+                "\ndireccionEntrega: " + direccionEntrega;
     }
 
     @Override

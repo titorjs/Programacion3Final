@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="interfaces.estibaje.interfaces_listaaentregar.ListaEntregar">
+  <grid id="27dc6" binding="jpListaEntregar" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="700"/>
+    </constraints>
+    <properties>
+      <minimumSize width="400" height="700"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="1e926" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="LISTA DE ENVIOS A ENTREGAR"/>
+        </properties>
+      </component>
+      <vspacer id="6c9dc">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="f9bb" class="javax.swing.JButton" binding="btnEntregsaQuitoS">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Entregas Quito Sur"/>
+        </properties>
+      </component>
+      <component id="dc3" class="javax.swing.JButton" binding="btnEntregasQuitoN">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Entregas Quito Norte"/>
+        </properties>
+      </component>
+      <component id="a9299" class="javax.swing.JButton" binding="btnEntregasDomingo">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Entregas Sto.Domingo"/>
+        </properties>
+      </component>
+      <component id="48e1d" class="javax.swing.JButton" binding="btnEntregasGuayaquil">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Entregas Guayaquil"/>
+        </properties>
+      </component>
+      <component id="ca4df" class="javax.swing.JTextArea" binding="txtEntregasInfo">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="31661" class="javax.swing.JButton" binding="btnListaEntregaraEstibaje">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Regresar"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

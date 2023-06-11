@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="interfaces.estibaje.ModEnviosEstibaje">
-  <grid id="27dc6" binding="jpModEnviosEstibaje" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="interfaces.estibaje.interfaces_modenvios.ModEnviosEstibaje">
+  <grid id="27dc6" binding="jpModEnviosEstibaje" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
       <xy x="20" y="20" width="400" height="700"/>
@@ -50,14 +50,8 @@
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
-        <properties/>
-      </component>
-      <component id="74f2a" class="javax.swing.JButton" binding="btnModPaquete">
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
         <properties>
-          <text value="Cambiar Paquete"/>
+          <editable value="false"/>
         </properties>
       </component>
       <component id="10008" class="javax.swing.JButton" binding="btnModReceptor">
@@ -78,10 +72,26 @@
       </component>
       <component id="bb0f" class="javax.swing.JButton" binding="btnRegresarInicioEstibaje">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Regresar"/>
+        </properties>
+      </component>
+      <component id="9af81" class="javax.swing.JButton" binding="btnCambiarSucursalEntrega">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cambiar Sucursal"/>
+        </properties>
+      </component>
+      <component id="74f2a" class="javax.swing.JButton" binding="btnModPaquete">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cambiar Paquete"/>
         </properties>
       </component>
     </children>

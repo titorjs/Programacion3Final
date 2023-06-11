@@ -1,4 +1,7 @@
-package interfaces.estibaje;
+package interfaces.estibaje.interfaces_modenvios;
+
+import clases.Direccion;
+import interfaces.Inicio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,11 +13,12 @@ public class PestañaModDireccion {
     private JButton btnCambiarDireccion;
     private JButton btnDiraModEnvios;
     private JPanel jpPestañaModDireccion;
+    private ModEnviosEstibaje modEnviosEstibaje;
 
     public PestañaModDireccion() {
         btnDiraModEnvios.addActionListener(new ActionListener() {
             /**
-             * BOTON PARA REGRESAR A LA PESTAÑA DE ENVIOS ESTIBAJE
+             * Redireccion a la pestaña de modificar envios
              * @param e the event to be processed
              */
             @Override
@@ -24,7 +28,22 @@ public class PestañaModDireccion {
                 este.revalidate();
             }
         });
+        /**
+         * Boton para Cambiar la direccion de entrega del envio que queriamos modifficar
+         */
+        btnCambiarDireccion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Direccion d = new Direccion(Double.parseDouble(txtCx.getText()),Double.parseDouble(txtCy.getText()));
+                Inicio.sistema.modificarDireccion(d,modEnviosEstibaje.getEnvioDeModEnvios());
+            }
+        });
     }
+
+    /**
+     * Metodo get para obtener el panel
+     * @return
+     */
 
     public JPanel getJpPestañaModDireccion() {
         return jpPestañaModDireccion;
