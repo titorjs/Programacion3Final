@@ -33,14 +33,13 @@ public class Sistema {
          */
         sucursales = new ArrayList<>();
         usuarios = new TreeSet<>();
-        envios = new TreeSet<>();
 
         /**
          * !!! Valores de prueba
          */
 
         admin = new Persona("Nombre del administrador","0000000000", "1234567890", "admin", TipoCuenta.ADMINISTRADOR);
-        usuarios.add(new Persona("Tito Jaramillo", "2350999039", "+593 99669 3539", "1q2w3e4r",TipoCuenta.ESTIBAJE));
+        usuarios.add(new Persona("Tito Jaramillo", "2350999039", "0996693539", "1q2w3e4r",TipoCuenta.ESTIBAJE));
         usuarios.add(new Persona("Maria","1010101010","123456789","enviador",TipoCuenta.USUARIO));
         usuarios.add(new Persona("Pedro","1010101020","123456789","receptor",TipoCuenta.USUARIO));
         //envios.add(new Envio(1,0, "10/20/2023",))

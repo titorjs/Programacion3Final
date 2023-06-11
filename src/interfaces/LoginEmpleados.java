@@ -74,9 +74,6 @@ public class LoginEmpleados {
                                             case EJECUTIVO:
                                                 //!!!
                                                 break;
-                                            case ADMINISTRADOR:
-                                                //!!!
-                                                break;
                                             case REPARTIDOR:
                                                 //!!!
                                                 break;
