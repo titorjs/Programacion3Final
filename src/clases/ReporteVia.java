@@ -1,12 +1,12 @@
 package clases;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ReporteVia extends Mensaje {
     private Direccion direccion;
 
-    public ReporteVia(Persona emisor, Persona receptor, String mensaje, Date enviado, Direccion direccion) {
-        super(emisor, receptor, mensaje, enviado);
+    public ReporteVia(Persona emisor, Persona receptor, String mensaje, LocalDateTime enviado, Direccion direccion) {
+        super(emisor, null, mensaje, enviado);
         this.direccion = direccion;
     }
 

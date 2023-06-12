@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import clases.Persona;
-import clases.TipoCuenta;
+import clases.*;
 import interfaces.CambiarDatosUsuario;
 import interfaces.Inicio;
 import sistema.Validaciones;
@@ -17,8 +16,8 @@ public class InicioAdmin {
     private JPanel inicioAdmin;
     private JTabbedPane menuAdmin;
     private JPanel administrarUsuarios;
-    private JPanel gestionarReportes;
     private JPanel verMensajes;
+    private JPanel gestionarReportes;
     private JComboBox cboFiltroUsuarios;
     private JPanel filtroTipoCuenta;
     private JCheckBox ckbFiltroRepartidor;
@@ -44,6 +43,23 @@ public class InicioAdmin {
     private JButton eliminarUsuarioButton;
     private JButton modificarUsuarioButton;
     private JPanel filtroCombo;
+    private JList listMensajes;
+    private JComboBox cboMensajeEmisor;
+    private JTextField txfMensajeCedula;
+    private JButton btnMensajeBuscar;
+    private JLabel lbMensajesDe;
+    private JButton btnMensajesTodos;
+    private JButton btnMensajesTexto;
+    private JTextField txfMensajesTexto;
+    private JComboBox cboReportesFiltro;
+    private JPanel reportesServicio;
+    private JComboBox cboReportesServicioQuien;
+    private JButton btnReportesServicioCedula;
+    private JTextField txfReporteServicoCedula;
+    private JList listReportes;
+    private JTextField txfReporteVialCedula;
+    private JPanel reportesVial;
+    private JButton btnReporteVialFiltrar;
 
     public InicioAdmin() {
 
@@ -140,7 +156,7 @@ public class InicioAdmin {
                                 Validaciones.validarTelefono(telefono);
                                 if (contrasenia.equals(contraseniaV)) {
                                     Persona p = new Persona(nombre, cedula, telefono, contrasenia, TipoCuenta.valueOf(cboAgregarTipoCuenta.getSelectedItem().toString()));
-                                    if(Inicio.sistema.agregarUsuario(p)){
+                                    if (Inicio.sistema.agregarUsuario(p)) {
                                         JOptionPane.showMessageDialog(null, "Usuario agregado correctamente");
                                         actualizarLista(Inicio.sistema.getUsuarios());
                                     } else {
@@ -284,12 +300,131 @@ public class InicioAdmin {
                  *  para que tenga idea de qué elemento modificar*/
 
                 Persona p = (Persona) listaUsuarios.getSelectedValue();
-                if (p!= null){
+                if (p != null) {
                     JFrame este = (JFrame) SwingUtilities.getWindowAncestor(inicioAdmin);
                     este.setContentPane(new CambiarDatosUsuario(true, p).getPanel());
                     este.revalidate();
                 } else {
                     JOptionPane.showMessageDialog(null, "No ha seleccionado ningún elemento para modificar.");
+                }
+            }
+        });
+        btnMensajeBuscar.addActionListener(new ActionListener() {
+            /**
+             * Filtrar y visualizar mensajes por usuario emisor o receptor
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int opcion = cboMensajeEmisor.getSelectedIndex();
+                String cedula = txfMensajeCedula.getText();
+
+                try {
+                    if (Validaciones.cedulaValida(cedula)) {
+                        SortedSet<Mensaje> mostrar = new TreeSet<>();
+                        if (opcion == 0) {
+                            lbMensajesDe.setText("Mensajes de " + cedula);
+                            mostrar = Inicio.sistema.buscarMensajesEmisor(cedula);
+                        } else {
+                            lbMensajesDe.setText("Mensajes para " + cedula);
+                            mostrar = Inicio.sistema.buscarMensajesEmisor(cedula);
+                        }
+                        DefaultListModel<Mensaje> mensajes = new DefaultListModel<>();
+                        for (Mensaje m : mostrar) {
+                            mensajes.addElement(m);
+                        }
+                        listMensajes.setModel(mensajes);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Cédula ingresada inválida");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+            }
+        });
+        btnMensajesTodos.addActionListener(new ActionListener() {
+            /**
+             * Mostrar todos los mensajes
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultListModel<Mensaje> mensajes = new DefaultListModel<>();
+                for (Mensaje m : Inicio.sistema.getMensajes()) {
+                    mensajes.addElement(m);
+                }
+                listMensajes.setModel(mensajes);
+            }
+        });
+        btnMensajesTexto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultListModel<Mensaje> mensajes = new DefaultListModel<>();
+                String buscado = txfMensajesTexto.getText();
+                for (Mensaje m : Inicio.sistema.buscarMensajesContenido(buscado)) {
+                    mensajes.addElement(m);
+                }
+                listMensajes.setModel(mensajes);
+            }
+        });
+        cboReportesFiltro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean vial = (cboReportesFiltro.getSelectedIndex() == 0);
+                boolean servicio = !vial;
+
+                reportesServicio.setEnabled(servicio);
+                reportesServicio.setVisible(servicio);
+                reportesVial.setEnabled(vial);
+                reportesVial.setVisible(vial);
+            }
+        });
+        btnReporteVialFiltrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cedula = txfReporteVialCedula.getText();
+                try {
+                    if (Validaciones.cedulaValida(cedula)){
+                        DefaultListModel<ReporteVia> reportes = new DefaultListModel<>();
+                        for (ReporteVia r: Inicio.sistema.buscarReporteVia(cedula)){
+                            reportes.addElement(r);
+                        }
+                        listReportes.setModel(reportes);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Cédula ingresad incorecta");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+            }
+        });
+        btnReportesServicioCedula.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cedula = txfReporteServicoCedula.getText();
+                try{
+                    if (Validaciones.cedulaValida(cedula)){
+                        if (Inicio.sistema.buscarUsuarioCedula(cedula) != null){
+                            boolean option = cboReportesServicioQuien.getSelectedIndex() == 0;
+                            ArrayList<ReporteServicios> reportes;
+                            if (option){
+                                reportes = Inicio.sistema.buscarReporteServicioEmisor(cedula);
+                            } else {
+                                reportes = Inicio.sistema.buscarReporteServicioReceptor(cedula);
+                            }
+                            DefaultListModel<ReporteServicios> reporteS = new DefaultListModel<>();
+                            for (ReporteServicios r: reportes){
+                                reporteS.addElement(r);
+                            }
+                            listReportes.setModel(reporteS);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El usuario ingresado no existe");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Cédula ingresada inválida");
+                    }
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             }
         });

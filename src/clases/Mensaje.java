@@ -1,14 +1,14 @@
 package clases;
 
-import java.util.Date;
+import java.time.*;
 
-public class Mensaje {
+public class Mensaje implements Comparable<Mensaje>{
     private Persona emisor;
     private Persona receptor;
     private String mensaje;
-    private Date enviado;
+    private LocalDateTime enviado;
 
-    public Mensaje(Persona emisor, Persona receptor, String mensaje, Date enviado) {
+    public Mensaje(Persona emisor, Persona receptor, String mensaje, LocalDateTime enviado) {
         this.emisor = emisor;
         this.receptor = receptor;
         this.mensaje = mensaje;
@@ -39,11 +39,25 @@ public class Mensaje {
         this.mensaje = mensaje;
     }
 
-    public Date getEnviado() {
+    public LocalDateTime getEnviado() {
         return enviado;
     }
 
-    public void setEnviado(Date enviado) {
+    public void setEnviado(LocalDateTime enviado) {
         this.enviado = enviado;
+    }
+
+    @Override
+    public String toString() {
+        return "De: " + emisor.getNombre() + "(" + emisor.getCedula() + ")\n" +
+               "Para: " + receptor.getNombre() + "(" + receptor.getCedula() + ")\n" +
+               "Mensaje: " + mensaje + "\n" +
+               "Fecha: " + enviado.toString() + "\n";
+
+    }
+
+    @Override
+    public int compareTo(Mensaje o) {
+        return enviado.compareTo(o.enviado);
     }
 }

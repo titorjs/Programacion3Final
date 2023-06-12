@@ -1,6 +1,8 @@
 package sistema;
 import clases.*;
 
+import java.lang.ref.SoftReference;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -14,6 +16,10 @@ public class Sistema {
     private ArrayList<Persona> empleadosQS;
     private SortedSet<Envio> envios;
     private SortedSet<Camion> camiones;
+    private SortedSet<Mensaje> mensajes;
+    private ArrayList<ReporteServicios> reporteServicios;
+    private ArrayList<ReporteVia> reporteVias;
+
     /**
      * Siempre debe tener como cédula el valor 00000000
      */
@@ -175,6 +181,91 @@ public class Sistema {
         return admin.validarContrasenia(clave);
     }
 
+    /**
+     * METODOS REFERENTES A MANEJO DE MENSAJES Y REPORTES
+     */
+
+
+    public SortedSet<Mensaje> getMensajes() {
+        return mensajes;
+    }
+
+    public ArrayList<ReporteServicios> getReporteServicios() {
+        return reporteServicios;
+    }
+
+    public ArrayList<ReporteVia> getReporteVias() {
+        return reporteVias;
+    }
+
+    public SortedSet<Mensaje> buscarMensajesEmisor(String cedulaEmisor){
+        SortedSet<Mensaje> busqueda = new TreeSet<>();
+        Persona emisor = buscarUsuarioCedula(cedulaEmisor);
+        for (Mensaje m: mensajes){
+            if (m.getEmisor().equals(emisor)){
+                busqueda.add(m);
+            }
+        }
+        return busqueda;
+    }
+
+    public SortedSet<Mensaje> buscarMensajesContenido(String buscado){
+        SortedSet<Mensaje> busqueda = new TreeSet<>();
+        for (Mensaje m: mensajes){
+            if (m.getMensaje().contains(buscado)){
+                busqueda.add(m);
+            }
+        }
+        return busqueda;
+    }
+
+    public ArrayList<ReporteVia> buscarReporteVia(String cedula){
+        ArrayList<ReporteVia> buscado = new ArrayList<>();
+        Persona p = buscarUsuarioCedula(cedula);
+        for (ReporteVia r: reporteVias){
+            if (r.getEmisor().equals(p)){
+                buscado.add(r);
+            }
+        }
+        return buscado;
+    }
+
+    public ArrayList<ReporteServicios> buscarReporteServicioEmisor(String cedula){
+        ArrayList<ReporteServicios> buscado = new ArrayList<>();
+        Persona p = buscarUsuarioCedula(cedula);
+        for (ReporteServicios r: reporteServicios){
+            if (r.getEmisor().equals(p)){
+                buscado.add(r);
+            }
+        }
+        return buscado;
+    }
+
+    public ArrayList<ReporteServicios> buscarReporteServicioReceptor(String cedula){
+        ArrayList<ReporteServicios> buscado = new ArrayList<>();
+        Persona p = buscarUsuarioCedula(cedula);
+        for (ReporteServicios r: reporteServicios){
+            if (r.getReceptor().equals(p)){
+                buscado.add(r);
+            }
+        }
+        return buscado;
+    }
+
+    public SortedSet<Mensaje> buscarMensajesReceptor(String cedulaReceptor){
+        SortedSet<Mensaje> busqueda = new TreeSet<>();
+        Persona receptor = buscarUsuarioCedula(cedulaReceptor);
+        for (Mensaje m: mensajes){
+            if (m.getReceptor().equals(receptor)){
+                busqueda.add(m);
+            }
+        }
+        return busqueda;
+    }
+
+    /**
+     * !!! Podría añadirse uno de busqueda por intervalo de fecha
+     */
 
 
     /**
