@@ -481,10 +481,19 @@ public class Sistema {
 
 
     public void generarListaEnviosSucursal(int idCamion){
-
+        for (Envio e:envios){
+            if (e.getEstado()<3){
+                buscarCamion(idCamion).getCarga().add(e);
+            }
+        }
     }
     public void generarListaEnviosEntrega(int idCamion){
-
+        Sucursales s;
+        for (Envio e:envios){
+            if (e.getEstado()==3){
+                buscarCamion(idCamion).getCarga().add(e);
+            }
+        }
     }
     /**
      * !!!TEMPORAL

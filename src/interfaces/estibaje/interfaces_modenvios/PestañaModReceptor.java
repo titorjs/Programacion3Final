@@ -94,7 +94,7 @@ public class PestañaModReceptor {
                         }
                     }
                 } catch (Exception exception) {
-                    JOptionPane.showMessageDialog(null, exception);
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
                 }
             }
         });
