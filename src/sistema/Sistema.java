@@ -38,42 +38,100 @@ public class Sistema {
         empleadosQS=new ArrayList<>();
         envios = new TreeSet<>();
         camiones = new TreeSet<>();
+        mensajes = new TreeSet<>();
+        reporteServicios = new ArrayList<>();
+        reporteVias = new ArrayList<>();
 
         /**
          * !!! Valores de prueba
          */
-        Date fechaActual=new Date();
-        fechaActual.setTime(GregorianCalendar.DAY_OF_YEAR);
 
-        GregorianCalendar g = new GregorianCalendar();
 
+        //Usuarios
         admin = new Persona("Nombre del administrador","0000000000", "1234567890", "admin", TipoCuenta.ADMINISTRADOR);
         Persona maria =new Persona("Maria","1010101010","123456789","enviador",TipoCuenta.USUARIO);
-        Persona pedro = new Persona("Pedro","1010101020","123456789","receptor",TipoCuenta.USUARIO);
-        Persona carlos = new Persona("Carlos","1010101030","123456789","conductor",TipoCuenta.CONDUCTOR);
+        Persona pedro = new Persona("Pedro","1010101028","123456789","receptor",TipoCuenta.USUARIO);
+        Persona carlos = new Persona("Carlos","1010101036","123456789","conductor",TipoCuenta.CONDUCTOR);
+        Persona pepe = new Persona("José","1010101044","123456789","conductor",TipoCuenta.EJECUTIVO);
+        Persona tito = new Persona("Tito Jaramillo", "2350999039", "0996693539", "1q2w3e4r",TipoCuenta.ESTIBAJE);
+        Persona jaime = new Persona("Jaime", "1010101051", "0996693539", "1q2w3e4r",TipoCuenta.REPARTIDOR);
 
-        Paquete p1 = new Paquete(new Dimension(10,10,10,10),"Paquete Prueba");
-        usuarios.add(new Persona("Tito Jaramillo", "2350999039", "0996693539", "1q2w3e4r",TipoCuenta.ESTIBAJE));
+        usuarios.add(tito);
         usuarios.add(maria);
         usuarios.add(pedro);
         usuarios.add(carlos);
-        empleadosQS.add(buscarUsuarioCedula("2350999039"));
+        usuarios.add(pepe);
+        usuarios.add(jaime);
+
+        empleadosQS.add(tito);
+        empleadosQS.add(maria);
+        empleadosQS.add(pedro);
+        empleadosQS.add(carlos);
+        empleadosQS.add(pepe);
+        empleadosQS.add(jaime);
+
+        //Sucursales
         Sucursal sQuitoS = new Sucursal(new Direccion(5,5),new TreeSet<>(),Sucursales.UIO_S,empleadosQS);
         Sucursal sGuayaquil = new Sucursal(new Direccion(10,10),new TreeSet<>(),Sucursales.GYE,empleadosQS);
         Sucursal sQuitoN= new Sucursal(new Direccion(6,6),new TreeSet<>(),Sucursales.UIO_N,empleadosQS);
         Sucursal sStoDomingo = new Sucursal(new Direccion(15,15),new TreeSet<>(),Sucursales.STO_DGO,empleadosQS);
-        envios.add(new Envio(1,0, LocalDateTime.now(),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5)));
-        envios.add(new Envio(2,0, LocalDateTime.of(2004, 12, 1, 12, 35, 34,4),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5)));
-        Camion camion = new Camion(1,new TreeSet(), carlos);
-        Camion camion2 = new Camion(2,new TreeSet(), pedro);
-        camiones.add(camion2);
-        camiones.add(camion);
-
 
         sucursales.add(sQuitoN);
         sucursales.add(sQuitoS);
         sucursales.add(sGuayaquil);
         sucursales.add(sStoDomingo);
+
+        //Envios
+        Paquete p1 = new Paquete(new Dimension(10,10,10,10),"Paquete Prueba");
+
+        Envio e1 = new Envio(1,0, LocalDateTime.now(),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5));
+        Envio e2 = new Envio(2,0, LocalDateTime.of(2004, 12, 1, 12, 35, 34,4),maria,pedro,p1,sQuitoS,sQuitoN,new Direccion(5,5));
+
+        envios.add(e1);
+        envios.add(e2);
+
+        //Camiones
+        Camion camion = new Camion(1,new TreeSet(), carlos);
+        Camion camion2 = new Camion(2,new TreeSet(), jaime);
+
+        camiones.add(camion2);
+        camiones.add(camion);
+
+        //Mensajes
+
+        LocalDateTime l1 = LocalDateTime.now();
+        LocalDateTime l2 = LocalDateTime.of(2021, 6, 11, 19, 15);
+        LocalDateTime l3 = LocalDateTime.of(2022, 6, 11, 19, 15);
+        LocalDateTime l4 = LocalDateTime.of(2024, 6, 11, 19, 15);
+        LocalDateTime l5 = LocalDateTime.of(2025, 6, 11, 19, 15);
+
+        Mensaje m1 = new Mensaje(maria, pedro, "Mensaje de maria a pedro", l1);
+        Mensaje m2 = new Mensaje(jaime, carlos, "Jaime-Carlos", l2);
+        Mensaje m3 = new Mensaje(pedro, maria, "pedro-maria", l3);
+        Mensaje m4 = new Mensaje(tito, pepe, "tito-pepe", l4);
+        Mensaje m5 = new Mensaje(pepe, carlos, "pepe-carlos", l5);
+
+        mensajes.add(m1);
+        mensajes.add(m2);
+        mensajes.add(m3);
+        mensajes.add(m4);
+        mensajes.add(m5);
+
+        //Reportes Via
+        ReporteVia rv1 = new ReporteVia(jaime,  "Reporte via jaime", l1, new Direccion(5, 5));
+        ReporteVia rv2 = new ReporteVia(jaime,  "Reporte via jaime", l1, new Direccion(4, 4));
+        ReporteVia rv3 = new ReporteVia(jaime,  "Reporte via jaime", l1, new Direccion(6, 6));
+
+        reporteVias.add(rv1);
+        reporteVias.add(rv2);
+        reporteVias.add(rv3);
+
+        //Reportes Servicios
+        ReporteServicios rs1 = new ReporteServicios(maria, jaime, "El paquete llegó en mal estado", l2, e1);
+        ReporteServicios rs2 = new ReporteServicios(maria, jaime, "El señor es un poco grosero", l3, e2);
+
+        reporteServicios.add(rs1);
+        reporteServicios.add(rs2);
 
     }
 

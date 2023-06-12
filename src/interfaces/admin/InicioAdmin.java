@@ -74,6 +74,13 @@ public class InicioAdmin {
         borrarFiltrosBusqueda();
         actualizarLista(Inicio.sistema.getUsuarios());
 
+
+        /** Valores iniciales reportes */
+        reportesServicio.setEnabled(false);
+        reportesServicio.setVisible(false);
+        reportesVial.setEnabled(false);
+        reportesVial.setVisible(false);
+
         /** Borrar filtros aplicados */
         btnBorrarFiltros.addActionListener(new ActionListener() {
             @Override
@@ -292,7 +299,7 @@ public class InicioAdmin {
             }
         });
 
-        /** !!! Modificar el usuario seleccionado */
+        /** Modificar datos del usuario seleccionado */
         modificarUsuarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -309,11 +316,12 @@ public class InicioAdmin {
                 }
             }
         });
+
+        /**
+         * Filtrar y visualizar mensajes por usuario emisor o receptor
+         * @param e the event to be processed
+         */
         btnMensajeBuscar.addActionListener(new ActionListener() {
-            /**
-             * Filtrar y visualizar mensajes por usuario emisor o receptor
-             * @param e the event to be processed
-             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 int opcion = cboMensajeEmisor.getSelectedIndex();
@@ -327,7 +335,7 @@ public class InicioAdmin {
                             mostrar = Inicio.sistema.buscarMensajesEmisor(cedula);
                         } else {
                             lbMensajesDe.setText("Mensajes para " + cedula);
-                            mostrar = Inicio.sistema.buscarMensajesEmisor(cedula);
+                            mostrar = Inicio.sistema.buscarMensajesReceptor(cedula);
                         }
                         DefaultListModel<Mensaje> mensajes = new DefaultListModel<>();
                         for (Mensaje m : mostrar) {
@@ -342,11 +350,13 @@ public class InicioAdmin {
                 }
             }
         });
+
+        /**
+         * Mostrar todos los mensajes
+         * @param e the event to be processed
+         */
         btnMensajesTodos.addActionListener(new ActionListener() {
-            /**
-             * Mostrar todos los mensajes
-             * @param e the event to be processed
-             */
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultListModel<Mensaje> mensajes = new DefaultListModel<>();
@@ -356,6 +366,8 @@ public class InicioAdmin {
                 listMensajes.setModel(mensajes);
             }
         });
+
+        /** Filtrar mensajes por contenido */
         btnMensajesTexto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -367,6 +379,8 @@ public class InicioAdmin {
                 listMensajes.setModel(mensajes);
             }
         });
+
+        /** Actualizar vistas Reportes */
         cboReportesFiltro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
