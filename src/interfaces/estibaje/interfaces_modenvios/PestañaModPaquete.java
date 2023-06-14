@@ -54,6 +54,7 @@ public class PestañaModPaquete {
                 Dimension d = new Dimension(alto,ancho,largo,peso);
                 Paquete p = new Paquete(d,txtAModDetalle.getText());
                 Inicio.sistema.modificarPaquete(p,modEnviosEstibaje.getEnvioDeModEnvios());
+                JOptionPane.showMessageDialog(null,"Se realizo el cambio correctamente");
             }
         });
     }

@@ -84,7 +84,7 @@ public class Sistema {
         //Envios
         Paquete p1 = new Paquete(new Dimension(10,10,10,10),"Paquete Prueba");
 
-        Envio e1 = new Envio(1,4, LocalDateTime.now(),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5));
+        Envio e1 = new Envio(1,3, LocalDateTime.now(),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5));
         Envio e2 = new Envio(2,0, LocalDateTime.of(2004, 12, 1, 12, 35, 34,4),maria,pedro,p1,sQuitoS,sQuitoN,new Direccion(5,5));
 
         envios.add(e1);
@@ -490,7 +490,7 @@ public class Sistema {
     public void generarListaEnviosEntrega(int idCamion){
         Sucursales s;
         for (Envio e:envios){
-            if (e.getEstado()==3){
+            if (e.getEstado()==3 || e.getEstado()==4){
                 buscarCamion(idCamion).getCarga().add(e);
             }
         }

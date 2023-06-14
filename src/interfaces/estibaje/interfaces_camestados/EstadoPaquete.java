@@ -45,9 +45,19 @@ public class EstadoPaquete {
         btnActualizarEstado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    Inicio.sistema.cambiarEstado((Inicio.sistema.buscarEnvio((int)spEstadoCodEnvio.getValue())),cboActualizarEstado.getSelectedItem().toString());
-                    cboActualizarEstado.setModel(actualizrComboBox());
-                    JOptionPane.showMessageDialog(null, "Se cambio correctamente");
+                Envio envio = Inicio.sistema.buscarEnvio((int)spEstadoCodEnvio.getValue());
+                if (envio!=null){
+                    if (envio.getEstado()==5){
+                        JOptionPane.showMessageDialog(null,"Este es el ultimo estado");
+                    } else {
+                        Inicio.sistema.cambiarEstado((Inicio.sistema.buscarEnvio((int)spEstadoCodEnvio.getValue())),cboActualizarEstado.getSelectedItem().toString());
+                        cboActualizarEstado.setModel(actualizrComboBox());
+                        JOptionPane.showMessageDialog(null, "Se cambio correctamente");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null,"No existe el envio");
+                }
+
             }
         });
     }
@@ -64,8 +74,11 @@ public class EstadoPaquete {
                 "En sucursal correcta",
                 "En curso a domicilio",
                 "Entregado"};
-        for (int i =Inicio.sistema.buscarEnvio((int)spEstadoCodEnvio.getValue()).getEstado();i<=estados.length;i++){
+        for (int i =Inicio.sistema.buscarEnvio((int)spEstadoCodEnvio.getValue()).getEstado()+1;i<estados.length;i++){
             modelo.addElement(estados[i]);
+            if (i==1){
+                modelo.removeElement(estados[i]);
+            }
         }
         return modelo;
     }
