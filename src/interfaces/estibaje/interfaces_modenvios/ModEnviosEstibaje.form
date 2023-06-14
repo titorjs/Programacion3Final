@@ -12,7 +12,7 @@
     <children>
       <component id="a9f71" class="javax.swing.JButton" binding="btnBuscarEnvio">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Buscar Envio"/>
@@ -37,7 +37,7 @@
       </component>
       <component id="e89be" class="javax.swing.JTextField" binding="txtBuscarEnvio">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -45,8 +45,8 @@
       </component>
       <component id="5c45" class="javax.swing.JTextArea" binding="txtAInfoEnvio">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="1" fill="1" indent="0" use-parent-layout="false">
-            <minimum-size width="-1" height="200"/>
+          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="380" height="200"/>
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
@@ -56,7 +56,9 @@
       </component>
       <component id="10008" class="javax.swing.JButton" binding="btnModReceptor">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="50" height="20"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Cambiar Persona Receptor"/>
@@ -64,7 +66,9 @@
       </component>
       <component id="a8cf1" class="javax.swing.JButton" binding="btnModDireccion">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="50" height="20"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Cambiar direccion"/>
@@ -72,7 +76,7 @@
       </component>
       <component id="bb0f" class="javax.swing.JButton" binding="btnRegresarInicioEstibaje">
         <constraints>
-          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Regresar"/>
@@ -80,7 +84,9 @@
       </component>
       <component id="9af81" class="javax.swing.JButton" binding="btnCambiarSucursalEntrega">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="50" height="20"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Cambiar Sucursal"/>
@@ -88,7 +94,9 @@
       </component>
       <component id="74f2a" class="javax.swing.JButton" binding="btnModPaquete">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="50" height="20"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Cambiar Paquete"/>

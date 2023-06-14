@@ -28,6 +28,6 @@ public class Paquete {
     @Override
     public String toString() {
         return "dimension: " + dimension +
-                ", detalle: " + detalle;
+                "¨\ndetalle: " + detalle;
     }
 }

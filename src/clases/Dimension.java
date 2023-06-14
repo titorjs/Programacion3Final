@@ -64,4 +64,13 @@ public class Dimension {
     public double volumenMetros(){
         return volumen()/1000000;
     }
+
+    @Override
+    public String toString() {
+        return "Dimension{" +
+                "alto: " + alto +
+                "ancho: " + ancho +
+                "largo: " + largo +
+                "peso: " + peso ;
+    }
 }
