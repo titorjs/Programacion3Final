@@ -21,7 +21,6 @@ public class PestañaModReceptor {
     private JButton btnCrearUsuarioTemporal;
     private JButton btnRecaEnvios1;
     private JButton btnRecaEnvios2;
-    private ModEnviosEstibaje modEnviosEstibaje;
 
     public PestañaModReceptor(Envio envio) {
         /**
@@ -61,7 +60,7 @@ public class PestañaModReceptor {
                             boolean cambio = JOptionPane.showOptionDialog(null, "Es este el usuario por el que desea cambiar?\n" +
                                     aux.toString(), "Confirmar usuario", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null) == 0;
                             if (cambio) {
-                                modEnviosEstibaje.getEnvioDeModEnvios().setReceptor(aux);
+                                envio.setReceptor(aux);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Se canceló el cambio de receptor");
                             }
@@ -91,6 +90,7 @@ public class PestañaModReceptor {
                         if (telefonoV) {
                             Persona personaTemporal = new Persona(txtNombreTemporal.getText(), txtCedulaTemporal.getText(), txtTelefonoTemporal.getText(), "", TipoCuenta.USUARIO);
                             envio.setReceptor(personaTemporal);
+                            JOptionPane.showMessageDialog(null,"Se creo correctamente");
                         }
                     }
                 } catch (Exception exception) {

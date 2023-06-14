@@ -24,4 +24,9 @@ public class Direccion {
     public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
+
+    @Override
+    public String toString() {
+        return "Direccion:"+latitud+","+longitud;
+    }
 }

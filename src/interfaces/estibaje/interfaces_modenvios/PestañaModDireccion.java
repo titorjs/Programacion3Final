@@ -37,6 +37,7 @@ public class PestañaModDireccion {
             public void actionPerformed(ActionEvent e) {
                 Direccion d = new Direccion(Double.parseDouble(txtCx.getText()),Double.parseDouble(txtCy.getText()));
                 envio.setDireccionEntrega(d);
+                JOptionPane.showMessageDialog(null,"Se cambio correctamente");
             }
         });
     }

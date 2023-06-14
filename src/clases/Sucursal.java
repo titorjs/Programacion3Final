@@ -47,4 +47,9 @@ public class Sucursal {
     public void setEquipo(ArrayList<Persona> equipo) {
         this.equipo = equipo;
     }
+
+    @Override
+    public String toString() {
+        return "Sucursal " + zona;
+    }
 }

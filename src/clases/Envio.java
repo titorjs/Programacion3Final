@@ -135,7 +135,7 @@ public class Envio implements Comparable<Envio>{
         if(this.id == o.getId()){
             return 0;
         }
-        if(this.id < o.getId()){
+        if(this.id > o.getId()){
             return 1;
         }
         return -1;

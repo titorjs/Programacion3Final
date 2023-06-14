@@ -133,7 +133,9 @@ public class ListaEntregar {
                 String text ="";
                 sucAux=Inicio.sistema.getSucursales();
                 for (int i=0;i<listaEnvios.size();i++){
-                    if (listaEnvios.get(i).getSucursalEntrega().equals(sucAux.get(3))){
+                    if (listaEnvios.get(i).getSucursalEntrega().equals(sucAux.get(3
+
+                    ))){
                         aux.add(listaEnvios.get(i));
                     }
                 }

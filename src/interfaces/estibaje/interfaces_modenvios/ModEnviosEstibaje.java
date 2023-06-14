@@ -50,23 +50,28 @@ public class ModEnviosEstibaje {
                 /**
                  * Se valida el estado en el que se encuentra el envio
                  */
-                if (envio.getEstado() >= 4) {
-                    int opcion = JOptionPane.showOptionDialog(
-                            null, "No es posible realizar cambios,¿desea crear un nuevo envio?",
-                            "Confirmacion", JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE, null, null, null);
-                    if (opcion == JOptionPane.YES_OPTION) {
-                        /**Redirigir a una nueva pestaña para crear envios y
-                         * tomar como base el pedido anterior que se cancela */
+                if (envio!=null){
+                    if (envio.getEstado() >= 4) {
+                        int opcion = JOptionPane.showOptionDialog(
+                                null, "No es posible realizar cambios,¿desea crear un nuevo envio?",
+                                "Confirmacion", JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, null, null, null);
+                        if (opcion == JOptionPane.YES_OPTION) {
+                            /**Redirigir a una nueva pestaña para crear envios y
+                             * tomar como base el pedido anterior que se cancela */
+                        }
+                        /**
+                         * En caso de que sea posible modificar se muestra la informacion del paquete
+                         * en el textArea.
+                         */
+                    } else {
+                        txtAInfoEnvio.setText(envio.toString());
                     }
-                    /**
-                     * En caso de que sea posible modificar se muestra la informacion del paquete
-                     * en el textArea.
-                     */
                 } else {
-                    txtAInfoEnvio.setText(envio.toString());
+                    JOptionPane.showMessageDialog(null,"No existe ese envio");
                 }
-            }
+                }
+
         });
         /**
          * Redireccion a la Pestaña para modificar la Persona receptora
@@ -97,9 +102,17 @@ public class ModEnviosEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                este.setContentPane(new PestañaModSucursal().getJpModSucursal());
+                este.setContentPane(new PestañaModSucursal(envio).getJpModSucursal());
                 este.revalidate();
 
+            }
+        });
+        btnModPaquete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
+                este.setContentPane(new PestañaModPaquete().getJpModPaquete());
+                este.revalidate();
             }
         });
     }
