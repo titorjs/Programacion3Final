@@ -54,6 +54,7 @@ public class Sistema {
         Persona carlos = new Persona("Carlos","1010101036","123456789","conductor",TipoCuenta.CONDUCTOR);
         Persona pepe = new Persona("José","1010101044","123456789","conductor",TipoCuenta.EJECUTIVO);
         Persona tito = new Persona("Tito Jaramillo", "2350999039", "0996693539", "1q2w3e4r",TipoCuenta.ESTIBAJE);
+        Persona tony = new Persona("Tony Chen","1724375371","0958665421","tonychen777",TipoCuenta.ESTIBAJE);
         Persona jaime = new Persona("Jaime", "1010101051", "0996693539", "1q2w3e4r",TipoCuenta.REPARTIDOR);
 
         usuarios.add(tito);
@@ -62,6 +63,7 @@ public class Sistema {
         usuarios.add(carlos);
         usuarios.add(pepe);
         usuarios.add(jaime);
+        usuarios.add(tony);
 
         empleadosQS.add(tito);
         empleadosQS.add(maria);
@@ -69,6 +71,7 @@ public class Sistema {
         empleadosQS.add(carlos);
         empleadosQS.add(pepe);
         empleadosQS.add(jaime);
+        empleadosQS.add(tony);
 
         //Sucursales
         Sucursal sQuitoS = new Sucursal(new Direccion(5,5),new TreeSet<>(),Sucursales.UIO_S,empleadosQS);

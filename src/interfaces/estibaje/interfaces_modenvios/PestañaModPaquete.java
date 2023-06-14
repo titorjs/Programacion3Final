@@ -1,6 +1,7 @@
 package interfaces.estibaje.interfaces_modenvios;
 
 import clases.Dimension;
+import clases.Envio;
 import clases.Paquete;
 import interfaces.Inicio;
 
@@ -17,13 +18,13 @@ public class PestañaModPaquete {
     private JTextArea txtAModDetalle;
     private JButton btnModPaquete;
     private JButton btnPaqaEnvios;
-    private ModEnviosEstibaje modEnviosEstibaje;
+
 
     public JPanel getJpModPaquete() {
         return jpModPaquete;
     }
 
-    public PestañaModPaquete() {
+    public PestañaModPaquete(Envio envio) {
     btnPaqaEnvios.addActionListener(new ActionListener() {
         /**
          * BOTON PARA REGRESAR A LA PESTAÑA DE ENVIOS ESTIBAJE
@@ -53,7 +54,7 @@ public class PestañaModPaquete {
                 Double peso = Double.parseDouble(txtModDimPeso.getText());
                 Dimension d = new Dimension(alto,ancho,largo,peso);
                 Paquete p = new Paquete(d,txtAModDetalle.getText());
-                Inicio.sistema.modificarPaquete(p,modEnviosEstibaje.getEnvioDeModEnvios());
+                Inicio.sistema.modificarPaquete(p,envio);
                 JOptionPane.showMessageDialog(null,"Se realizo el cambio correctamente");
             }
         });

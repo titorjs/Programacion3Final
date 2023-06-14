@@ -61,6 +61,7 @@
           </grid>
         </constraints>
         <properties>
+          <enabled value="false"/>
           <text value="Cambiar Persona Receptor"/>
         </properties>
       </component>
@@ -71,6 +72,7 @@
           </grid>
         </constraints>
         <properties>
+          <enabled value="false"/>
           <text value="Cambiar direccion"/>
         </properties>
       </component>
@@ -89,6 +91,7 @@
           </grid>
         </constraints>
         <properties>
+          <enabled value="false"/>
           <text value="Cambiar Sucursal"/>
         </properties>
       </component>
@@ -99,6 +102,7 @@
           </grid>
         </constraints>
         <properties>
+          <enabled value="false"/>
           <text value="Cambiar Paquete"/>
         </properties>
       </component>

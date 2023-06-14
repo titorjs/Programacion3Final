@@ -65,6 +65,10 @@ public class ModEnviosEstibaje {
                          * en el textArea.
                          */
                     } else {
+                        btnModReceptor.setEnabled(true);
+                        btnModPaquete.setEnabled(true);
+                        btnModDireccion.setEnabled(true);
+                        btnCambiarSucursalEntrega.setEnabled(true);
                         txtAInfoEnvio.setText(envio.toString());
                     }
                 } else {
@@ -111,7 +115,7 @@ public class ModEnviosEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                este.setContentPane(new PestañaModPaquete().getJpModPaquete());
+                este.setContentPane(new PestañaModPaquete(envio).getJpModPaquete());
                 este.revalidate();
             }
         });
