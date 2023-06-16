@@ -60,6 +60,10 @@ public class InicioAdmin {
     private JTextField txfReporteVialCedula;
     private JPanel reportesVial;
     private JButton btnReporteVialFiltrar;
+    private JButton cerrarSesiónButton;
+    private JPanel cerrarSesion;
+    private JTextArea txaMensajesResultado;
+    private JButton mostrarDatosUsuarioButton;
 
     public InicioAdmin() {
 
@@ -337,11 +341,12 @@ public class InicioAdmin {
                             lbMensajesDe.setText("Mensajes para " + cedula);
                             mostrar = Inicio.sistema.buscarMensajesReceptor(cedula);
                         }
-                        DefaultListModel<Mensaje> mensajes = new DefaultListModel<>();
+                        String resultado = "";
                         for (Mensaje m : mostrar) {
-                            mensajes.addElement(m);
+                            resultado+= m + "\n";
                         }
-                        listMensajes.setModel(mensajes);
+                        txaMensajesResultado.setText(resultado);
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Cédula ingresada inválida");
                     }
@@ -359,11 +364,11 @@ public class InicioAdmin {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultListModel<Mensaje> mensajes = new DefaultListModel<>();
+                String resultado = "";
                 for (Mensaje m : Inicio.sistema.getMensajes()) {
-                    mensajes.addElement(m);
+                    resultado += m + "\n";
                 }
-                listMensajes.setModel(mensajes);
+                txaMensajesResultado.setText(resultado);
             }
         });
 
@@ -371,12 +376,12 @@ public class InicioAdmin {
         btnMensajesTexto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultListModel<Mensaje> mensajes = new DefaultListModel<>();
                 String buscado = txfMensajesTexto.getText();
+                String resultado = "";
                 for (Mensaje m : Inicio.sistema.buscarMensajesContenido(buscado)) {
-                    mensajes.addElement(m);
+                    resultado += m + "\n";
                 }
-                listMensajes.setModel(mensajes);
+                txaMensajesResultado.setText(resultado);
             }
         });
 
@@ -439,6 +444,33 @@ public class InicioAdmin {
                     }
                 } catch (Exception ex){
                     JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+            }
+        });
+        /**
+         * Cerrar sesión, redirigir al inicio
+         */
+        cerrarSesiónButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(inicioAdmin);
+                este.setContentPane(new Inicio().getPanel());
+                este.revalidate();
+            }
+        });
+        mostrarDatosUsuarioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Persona p = (Persona) listaUsuarios.getSelectedValue();
+                if (p != null) {
+                    String mensaje = "Nombre: " + p.getNombre() + "\n" +
+                                     "Cédula: " + p.getCedula() + "\n" +
+                                     "Teléfono: " + p.getTelefono() + "\n" +
+                                     "Tipo: " + p.getTipo().name() + "\n" +
+                                     "\t" + p.getTipo().toString();
+                    JOptionPane.showMessageDialog(null, mensaje);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ningún usuario seleccionado");
                 }
             }
         });

@@ -19,7 +19,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="4ae7b" binding="administrarUsuarios" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="4ae7b" binding="administrarUsuarios" layout-manager="GridLayoutManager" row-count="10" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
               <tabbedpane title="Administrar Usuarios"/>
@@ -140,17 +140,9 @@
                   </component>
                 </children>
               </grid>
-              <component id="c3dfe" class="javax.swing.JList" binding="listaUsuarios">
-                <constraints>
-                  <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
               <vspacer id="87d10">
                 <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                  <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
                     <minimum-size width="-1" height="30"/>
                   </grid>
                 </constraints>
@@ -225,6 +217,27 @@
                   </component>
                 </children>
               </grid>
+              <component id="37079" class="javax.swing.JButton" binding="mostrarDatosUsuarioButton" default-binding="true">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Mostrar Datos Usuario"/>
+                </properties>
+              </component>
+              <scrollpane id="f34">
+                <constraints>
+                  <grid row="9" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="c3dfe" class="javax.swing.JList" binding="listaUsuarios">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </grid>
           <grid id="3915e" binding="agregarUsuario" layout-manager="GridLayoutManager" row-count="17" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -369,7 +382,7 @@
           <grid id="accd0" binding="verMensajes" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
-              <tabbedpane title="Ver Mensajes"/>
+              <tabbedpane title="Mensajes"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -381,14 +394,6 @@
                   </grid>
                 </constraints>
               </vspacer>
-              <component id="d9623" class="javax.swing.JList" binding="listMensajes">
-                <constraints>
-                  <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
               <component id="a100a" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -472,12 +477,27 @@
                 </constraints>
                 <properties/>
               </component>
+              <scrollpane id="cec4f">
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="a2e31" class="javax.swing.JTextArea" binding="txaMensajesResultado">
+                    <constraints/>
+                    <properties>
+                      <editable value="false"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </grid>
           <grid id="cf4dc" binding="gestionarReportes" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
-              <tabbedpane title="Gestionar Reportes"/>
+              <tabbedpane title="Reportes"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -592,19 +612,47 @@
                   </component>
                 </children>
               </grid>
-              <component id="c1f6c" class="javax.swing.JList" binding="listReportes">
-                <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="50"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
               <vspacer id="1348d">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="1" fill="0" indent="0" use-parent-layout="false">
                     <minimum-size width="-1" height="40"/>
                   </grid>
+                </constraints>
+              </vspacer>
+              <scrollpane id="ee246">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="c1f6c" class="javax.swing.JList" binding="listReportes">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+          <grid id="a6d49" binding="cerrarSesion" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="10" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="Cerrar Sesión"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="8d2b" class="javax.swing.JButton" binding="cerrarSesiónButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Cerrar Sesión"/>
+                </properties>
+              </component>
+              <vspacer id="3e27e">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
             </children>
