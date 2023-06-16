@@ -27,7 +27,7 @@ public class InicioAdmin {
     private JCheckBox ckbFiltroEjecutivo;
     private JTextField txtFiltroCedula;
     private JPanel filtroCedula;
-    private JTextField textField1;
+    private JTextField txtFiltroNombre;
     private JList listaUsuarios;
     private JButton btnBorrarFiltros;
     private JPanel filtroNombre;
@@ -263,7 +263,7 @@ public class InicioAdmin {
                      * Filtro con Nombre
                      */
                     case 2:
-                        String nombre = txtFiltroCedula.getText();
+                        String nombre = txtFiltroNombre.getText();
                         SortedSet<Persona> busqueda = Inicio.sistema.buscarUsuarioNombre(nombre);
                         if (busqueda.isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Ningún usuario cumple con la condición");
