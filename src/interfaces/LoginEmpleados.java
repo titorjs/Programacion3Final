@@ -36,7 +36,7 @@ public class LoginEmpleados {
                 String usuario = txfUsuario.getText();
                 /**
                  * Inicio sesión admin
-                 * !!! Talvez se puede deshacer y unir con el de abajo o hacer que el admin solo sea un usuario más
+                 * !!! Talvez se puede deshacer y unir con el de abajo o hacer que el admin solo sea un interfaces.usuario más
                  */
                 if (usuario.equals("admin")) {
                     boolean validar = Inicio.sistema.validarAdmin(pswContrasenia.getText());
@@ -53,16 +53,16 @@ public class LoginEmpleados {
                     }
                 } else {
                     /**
-                     * Manejo de inicio de sesión de usuario empleado
+                     * Manejo de inicio de sesión de interfaces.usuario empleado
                      */
                     try {
                         //Validar la cédula
                         boolean validar = Validaciones.cedulaValida(usuario);
                         if (validar) {
-                            //Validar que exista el usuario de cédula "usuario"
+                            //Validar que exista el interfaces.usuario de cédula "interfaces.usuario"
                             Persona p = Inicio.sistema.buscarUsuarioCedula(usuario);
                             if (p != null) {
-                                //Validar que no sea del tipo usuario pues es login para empleados
+                                //Validar que no sea del tipo interfaces.usuario pues es login para empleados
                                 if (!p.getTipo().equals(TipoCuenta.USUARIO)) {
                                     //Validar que la contraseña sea correcta
                                     validar = p.validarContrasenia(pswContrasenia.getText());

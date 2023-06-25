@@ -143,7 +143,7 @@ public class InicioAdmin {
             }
         });
 
-        /** Agregar usuario */
+        /** Agregar interfaces.usuario */
         btnAgregarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -171,7 +171,7 @@ public class InicioAdmin {
                                         JOptionPane.showMessageDialog(null, "Usuario agregado correctamente");
                                         actualizarLista(Inicio.sistema.getUsuarios());
                                     } else {
-                                        JOptionPane.showMessageDialog(null, "Un usuario con esa cédula ya existe");
+                                        JOptionPane.showMessageDialog(null, "Un interfaces.usuario con esa cédula ya existe");
                                     }
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
@@ -184,7 +184,7 @@ public class InicioAdmin {
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Seleccione un tipo para el usuario");
+                    JOptionPane.showMessageDialog(null, "Seleccione un tipo para el interfaces.usuario");
                 }
             }
         });
@@ -249,7 +249,7 @@ public class InicioAdmin {
                                     model.add(buscado);
                                     actualizarLista(model);
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "No existe un usuario con la cédula ingresada");
+                                    JOptionPane.showMessageDialog(null, "No existe un interfaces.usuario con la cédula ingresada");
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(null, "La cédula ingresada no es válida");
@@ -266,7 +266,7 @@ public class InicioAdmin {
                         String nombre = txtFiltroNombre.getText();
                         SortedSet<Persona> busqueda = Inicio.sistema.buscarUsuarioNombre(nombre);
                         if (busqueda.isEmpty()) {
-                            JOptionPane.showMessageDialog(null, "Ningún usuario cumple con la condición");
+                            JOptionPane.showMessageDialog(null, "Ningún interfaces.usuario cumple con la condición");
                         } else {
                             actualizarLista(busqueda);
                         }
@@ -280,14 +280,14 @@ public class InicioAdmin {
             }
         });
 
-        /** Eliminar el usuario seleccionado
+        /** Eliminar el interfaces.usuario seleccionado
          * !!! Falta comentar*/
         eliminarUsuarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Persona p = (Persona) listaUsuarios.getSelectedValue();
                 if (p != null) {
-                    int opcion = JOptionPane.showConfirmDialog(null, "Está seguro de que desea eliminar el usuario: \n" +
+                    int opcion = JOptionPane.showConfirmDialog(null, "Está seguro de que desea eliminar el interfaces.usuario: \n" +
                             "\tCedula: " + p.getCedula() + "\n" +
                             "\tNombre: " + p.getNombre(), "Confirmación eliminación", JOptionPane.YES_NO_OPTION);
                     if (opcion == 0) {
@@ -295,15 +295,15 @@ public class InicioAdmin {
                         JOptionPane.showMessageDialog(null, "Usuario eliminado con éxito.");
                         actualizarLista(Inicio.sistema.getUsuarios());
                     } else {
-                        JOptionPane.showMessageDialog(null, "Se canceló la eliminación del usuario");
+                        JOptionPane.showMessageDialog(null, "Se canceló la eliminación del interfaces.usuario");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Ningún usuario seleccionado");
+                    JOptionPane.showMessageDialog(null, "Ningún interfaces.usuario seleccionado");
                 }
             }
         });
 
-        /** Modificar datos del usuario seleccionado */
+        /** Modificar datos del interfaces.usuario seleccionado */
         modificarUsuarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -322,7 +322,7 @@ public class InicioAdmin {
         });
 
         /**
-         * Filtrar y visualizar mensajes por usuario emisor o receptor
+         * Filtrar y visualizar mensajes por interfaces.usuario emisor o receptor
          * @param e the event to be processed
          */
         btnMensajeBuscar.addActionListener(new ActionListener() {
@@ -437,7 +437,7 @@ public class InicioAdmin {
                             }
                             listReportes.setModel(reporteS);
                         } else {
-                            JOptionPane.showMessageDialog(null, "El usuario ingresado no existe");
+                            JOptionPane.showMessageDialog(null, "El interfaces.usuario ingresado no existe");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Cédula ingresada inválida");
@@ -470,7 +470,7 @@ public class InicioAdmin {
                                      "\t" + p.getTipo().toString();
                     JOptionPane.showMessageDialog(null, mensaje);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Ningún usuario seleccionado");
+                    JOptionPane.showMessageDialog(null, "Ningún interfaces.usuario seleccionado");
                 }
             }
         });

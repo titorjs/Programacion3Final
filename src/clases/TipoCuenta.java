@@ -2,7 +2,7 @@ package clases;
 
 public enum TipoCuenta {
     ADMINISTRADOR("Cuenta administrador, maneja usuarios"),
-    USUARIO("Cuenta normal de usuario"),
+    USUARIO("Cuenta normal de interfaces.usuario"),
     ESTIBAJE("Cuenta relacionada con bodega"),
     CONDUCTOR("Cuenta relacionada con el conductor entre sucursales"),
     REPARTIDOR("Cuenta para quien entrega dentro de la ciudad"),

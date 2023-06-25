@@ -30,7 +30,7 @@ public class CambiarDatosUsuario {
                 cboTipoCuenta.addItem(tipo.name());
         }
 
-        /** El admin puede editar el nombre y tipo, el usuario no */
+        /** El admin puede editar el nombre y tipo, el interfaces.usuario no */
         txfNombre.setEditable(esAdmin);
         cboTipoCuenta.setEnabled(esAdmin);
 
@@ -88,7 +88,7 @@ public class CambiarDatosUsuario {
             panel = new InicioAdmin().getPanel();
 
         } else {
-            /** !!! Se debe agregar para que navegue al inicio del usuario y borrar lo que está ahorita */
+            /** !!! Se debe agregar para que navegue al inicio del interfaces.usuario y borrar lo que está ahorita */
             panel = null;
         }
         JFrame este = (JFrame) SwingUtilities.getWindowAncestor(cambiarDatosUsuario);

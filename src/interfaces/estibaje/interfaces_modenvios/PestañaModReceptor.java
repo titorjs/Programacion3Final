@@ -57,15 +57,15 @@ public class PestañaModReceptor {
                     if (cedulaV) {
                         Persona aux = Inicio.sistema.buscarUsuarioCedula(txtModCedulaNReceptor.getText());
                         if (aux != null) {
-                            boolean cambio = JOptionPane.showOptionDialog(null, "Es este el usuario por el que desea cambiar?\n" +
-                                    aux.toString(), "Confirmar usuario", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null) == 0;
+                            boolean cambio = JOptionPane.showOptionDialog(null, "Es este el interfaces.usuario por el que desea cambiar?\n" +
+                                    aux.toString(), "Confirmar interfaces.usuario", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null) == 0;
                             if (cambio) {
                                 envio.setReceptor(aux);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Se canceló el cambio de receptor");
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "No existe el usuario");
+                            JOptionPane.showMessageDialog(null, "No existe el interfaces.usuario");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null , "Cédula ingresada inválida");
@@ -76,7 +76,7 @@ public class PestañaModReceptor {
             }
         });
         /**
-         * Boton para crear un usuario temporal validando la cedula y el telefono
+         * Boton para crear un interfaces.usuario temporal validando la cedula y el telefono
          */
         btnCrearUsuarioTemporal.addActionListener(new ActionListener() {
 

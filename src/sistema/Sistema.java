@@ -151,7 +151,7 @@ public class Sistema {
         return usuarios.add(nuevo);
     }
 
-    /** Elimina un usuario en base a la cédula */
+    /** Elimina un interfaces.usuario en base a la cédula */
     public void eliminarUsuario(Persona p){
         usuarios.remove(p);
     }
@@ -437,7 +437,7 @@ public class Sistema {
 
     /**
      * Metodo para Modificar la persona receptora del envio
-     * @param p Persona ya existente que se busca con el metodo de buscar usuario por cedula
+     * @param p Persona ya existente que se busca con el metodo de buscar interfaces.usuario por cedula
      *          en caso de no existir se crea una nueva persona, pero esto se realiza en
      *          interfaz.
      * @param e El envio al cual se va a modificar
