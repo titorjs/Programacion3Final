@@ -19,11 +19,25 @@ public class UsuarioInicio {
 
     public UsuarioInicio(Persona p) {
         txtNombreFIjo.setText(p.getNombre());
+        /*
+         Redirecciona a interfaz inicio
+         */
         btnCerrarSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(usuarioInicio);
                 este.setContentPane(new Inicio().getPanel());
+                este.revalidate();
+            }
+        });
+        /*
+            Redirecciona a interfaz usuario envio
+         */
+        btnGenerarPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(usuarioInicio);
+                este.setContentPane(new UsuarioEnvio(p).getUsuarioEnvio());
                 este.revalidate();
             }
         });
@@ -35,4 +49,5 @@ public class UsuarioInicio {
     public JPanel getUsuarioInicio() {
         return usuarioInicio;
     }
+
 }

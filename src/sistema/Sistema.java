@@ -395,6 +395,18 @@ public class Sistema {
     }
 
     /**
+     * Metodo para asignar id's únicas a los envios, se le suma 1 al último envio que hay en la lista
+     * @return idUnico
+     */
+    public int asignarIdEnvio(){
+        int idUnico=0;
+        ArrayList<Envio> lista =new ArrayList<>(envios);
+        Envio ultimo= lista.get(lista.size()-1);
+        idUnico= ultimo.getId()+1;
+        return idUnico;
+    }
+
+    /**
      * Metodo para remover el envio de la lista y removerlo de la lista de la
      * sucursal correspondiente
      * @param e significa el apuntador de envio a modificar bobo quien lo lea
