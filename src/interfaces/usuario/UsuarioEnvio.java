@@ -16,8 +16,8 @@ public class UsuarioEnvio {
     private JTextField txtCedulaVerificar;
     private JTextField txtNombreReceptor;
     private JTextField txtTelReceptor;
-    private JTextField txtLatitudDireccion;
-    private JTextField txtLongitudDireccion;
+    private JTextField txtLatitudDireccionDomicilio;
+    private JTextField txtLongitudDireccionDomicilio;
     private JPanel paquete;
     private JTextField txtAlturaDimension;
     private JTextField txtAnchoDimension;
@@ -29,8 +29,6 @@ public class UsuarioEnvio {
     private JComboBox cboSucursalSalida;
     private JComboBox cboSucursalDestino;
     private JButton btnSolicitar;
-    private JTextField txtLatitudDireccionDomicilio;
-    private JTextField txtLongitudDireccionDomicilio;
     private JPanel usuarioEnvio;
     private JPanel clienteTemporal;
     private JPanel servicioDomicilio;
@@ -38,8 +36,13 @@ public class UsuarioEnvio {
     private JTextField txtDetallePaquete;
     private JButton btnAgregarPaquete;
     private JButton btnAgregarSucursales;
+    private JTextField txtLatitudEntrega;
+    private JTextField txtLongitudEntrega;
+    private JPanel personaDatos;
+    private JPanel datosPaquete;
+    private JPanel sucursalDatos;
     private Persona receptor;
-    private Direccion direccion;
+    private Direccion entrega;
     private Paquete paquetin;
     private Sucursal salida;
     private Sucursal destino;
@@ -48,13 +51,14 @@ public class UsuarioEnvio {
 
 
     public UsuarioEnvio(Persona p) {
+        //inicializo mis atributos
         domicilio=null;
         estado=-1;
         salida=null;
         destino=null;
         paquetin=null;
         receptor=null;
-        direccion=null;
+        entrega=null;
     clienteTemporal.setVisible(false);
     servicioDomicilio.setVisible(false);
     /*
@@ -76,29 +80,43 @@ public class UsuarioEnvio {
             public void actionPerformed(ActionEvent e) {
                 String cedula=txtCedulaVerificar.getText();
                 try{
-                    double latitud= Double.parseDouble(txtLatitudDireccion.getText()),
-                            longitud=Double.parseDouble(txtLongitudDireccion.getText());
+                    double latitud= Double.parseDouble(txtLatitudDireccionDomicilio.getText()),
+                            longitud=Double.parseDouble(txtLongitudDireccionDomicilio.getText());
+                    //Valida que los campos estén llenos
                     if (cedula.equals("") ){
                         JOptionPane.showMessageDialog(null,"Llene todos los campos correctamente");
                     }else {
                         try{
                             boolean validar= Validaciones.cedulaValida(cedula);
+                            //Valido cedula
                             if (validar){
                                 Persona usuario= Inicio.sistema.buscarUsuarioCedula(cedula);
+                                //Valido si el usuario está en el sistema
                                 if (usuario!=null){
-                                    int opcion=JOptionPane.showConfirmDialog(null,"Está seguro que este es el usuario receptor:\n" +
-                                            "\tCedula: "+usuario.getCedula()+"\n"+usuario.getNombre(), "Confirmación de receptor",JOptionPane.YES_NO_OPTION);
-                                    if(opcion==0){
-                                        JOptionPane.showMessageDialog(null,"El paquete se enviará a dicho receptor");
-                                        receptor=usuario;
-                                        direccion=new Direccion(latitud,longitud);
-                                    }else {
-                                        JOptionPane.showMessageDialog(null,"Ingrese de nuevo la cedula del usuario receptor");
+                                    if (usuario==p){
+                                        JOptionPane.showMessageDialog(null,"No puede ponerse a si mismo como receptor");
                                         txtCedulaVerificar.setText("");
+                                    }else {
+                                        int opcion=JOptionPane.showConfirmDialog(null,"Está seguro que este es el usuario receptor:\n" +
+                                                "\tCedula: "+usuario.getCedula()+"\n"+usuario.getNombre(), "Confirmación de receptor",JOptionPane.YES_NO_OPTION);
+                                        //Valido si quiere crear una Persona receptor con usuarios del sistema
+                                        if(opcion==0){
+                                            JOptionPane.showMessageDialog(null,"El paquete se enviará a dicho receptor");
+                                            receptor=usuario;
+                                            domicilio=new Direccion(latitud,longitud);
+                                        }else {
+                                            JOptionPane.showMessageDialog(null,"Ingrese de nuevo la cedula del usuario receptor");
+                                            txtCedulaVerificar.setText("");
+                                        }
                                     }
                                 }else{
                                     int o2= JOptionPane.showConfirmDialog(null,"El usuario no está en el sistema, seleccione yes si desea agregar" +
                                             "un usario temporal, presione no, si quiere volver a intentar con otra cedula","Confirmacion",JOptionPane.YES_NO_OPTION);
+                                    /*
+                                    * Valida que la persona que busca no está en el sistema y le pregunta si quiere
+                                    * crear una Persona temporal o buscar otra Persona (puede ser usuario o no)
+                                     * */
+
                                     if(o2==0){
                                         JOptionPane.showMessageDialog(null,"Por favor llenar los siguientes datos");
                                         clienteTemporal.setVisible(true);
@@ -107,7 +125,6 @@ public class UsuarioEnvio {
                                         JOptionPane.showMessageDialog(null,"Ingrese de nuevo la cedula del usuario receptor");
                                         txtCedulaVerificar.setText("");
                                     }
-
                                 }
                             }else{
                                 JOptionPane.showMessageDialog(null,"Cedula Inválida");
@@ -119,6 +136,7 @@ public class UsuarioEnvio {
                     }
                 }catch(NumberFormatException ec){
                     double latitud=-1,longitud=-1;
+                    //Valida que los campos estén llenos
                     if (cedula.equals("") || latitud==-1 || longitud==-1){
                         JOptionPane.showMessageDialog(null,"Llene todos los campos correctamente");
                     }
@@ -132,15 +150,16 @@ public class UsuarioEnvio {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    double latitud=Double.parseDouble(txtLatitudDireccionDomicilio.getText()),
-                            longitud=Double.parseDouble(txtLongitudDireccionDomicilio.getText());
-                    domicilio=new Direccion(latitud,longitud);
-                    JOptionPane.showMessageDialog(null,"Servicio a Domicilio aceptado");
+                    double latitud= Double.parseDouble(txtLatitudEntrega.getText()),
+                            longitud=Double.parseDouble(txtLongitudEntrega.getText());
+                    entrega=new Direccion(latitud,longitud);
+                    JOptionPane.showMessageDialog(null,"Servicio añadido");
+
                 }catch(NumberFormatException ex){
                     double latitud=-1,
                             longitud=-1;
                     if (latitud==-1 || longitud==-1){
-                        JOptionPane.showMessageDialog(null,"Llene los campos correctamente");
+                        JOptionPane.showMessageDialog(null,"Llene todos los campos correctamente");
                     }
                 }
 
@@ -156,12 +175,18 @@ public class UsuarioEnvio {
                 String nombre=txtNombreReceptor.getText(),
                         telefono=txtTelReceptor.getText();
                 try{
+                    //Valida el telefono
                     Validaciones.validarTelefono(telefono);
                     String cedula=txtCedulaVerificar.getText();
-                    double latitud=Double.parseDouble(txtLatitudDireccion.getText()),
-                            longitud=Double.parseDouble(txtLongitudDireccion.getText());
+                    double latitud=Double.parseDouble(txtLatitudDireccionDomicilio.getText()),
+                            longitud=Double.parseDouble(txtLongitudDireccionDomicilio.getText());
+                    /*
+                    * Crea una Persona temporal receptora, no está en el sistema
+                    * la contraseña la mando como "**" y el tipo de cuenta null
+                    * no se si sea correcto jajajaj
+                    * */
                     receptor=new Persona(nombre,cedula,telefono,"**",null);
-                    direccion=new Direccion(latitud,longitud);
+                    domicilio=new Direccion(latitud,longitud);
                     JOptionPane.showMessageDialog(null,"Datos del cliente temporal agregados");
                 }catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -181,9 +206,11 @@ public class UsuarioEnvio {
                             ancho=Double.parseDouble(txtAnchoDimension.getText()),
                             largo=Double.parseDouble(txtLargoDimension.getText()),
                             peso=Double.parseDouble(txtPesoDimension.getText());
+                    //Valida que los campos estén llenos
                     if (detalle.equals("") || alto<0|| ancho<0|| largo<0|| peso<0){
                         JOptionPane.showMessageDialog(null,"Llene todos los campos correctamente");
                     }else{
+                        //Crea un paquete para el envio
                         Dimension d= new Dimension(alto,ancho,largo,peso);
                         paquetin=new Paquete(d,detalle);
                         JOptionPane.showMessageDialog(null,"Paquete Creado");
@@ -193,6 +220,7 @@ public class UsuarioEnvio {
                             ancho=-1,
                             largo=-1,
                             peso=-1;
+                    //Valida que los campos estén llenos
                     if (detalle.equals("") || alto==-1|| ancho==-1|| largo==-1|| peso==-1){
                         JOptionPane.showMessageDialog(null,"Llene todos los campos correctamente");
                     }
@@ -237,34 +265,46 @@ public class UsuarioEnvio {
                             destino=Inicio.sistema.getSucursales().get(3);
                             break;}
                 if(salida!=null && destino!=null){
-                    //Verifico si utiliza el servicio a domicilio
-                    int option=JOptionPane.showConfirmDialog(null,"Sucursales agregadas, desea utilizar el servicio a domicilio para recolectar el paquete?"
+
+                    int option=JOptionPane.showConfirmDialog(null,"Sucursales agregadas, desea utilizar el servicio a domicilio para la entrega del paquete?"
                             ,"Confirmación",JOptionPane.YES_NO_OPTION);
+                    //Verifico si utiliza el servicio a domicilio
                     if (option==0){
                         estado=0;
                         JOptionPane.showMessageDialog(null,"Por favor llenar los datos para retiro a domicilio");
                         servicioDomicilio.setVisible(true);
                         btnAgregarSucursales.setEnabled(false);
                     }else{
-                        estado=1;
+                        estado=0;
                         JOptionPane.showMessageDialog(null,"Servicio domicilio cancelado");
                     }
                 }
             }
         });
+        /*
+            Crea un envio y se lo agrega a la lista
+         */
         btnCrearEnvio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (receptor==null || paquetin==null || salida==null|| destino==null || estado==-1){
-                    JOptionPane.showMessageDialog(null,"Debe ingresar todos los datos en los campos requeridos");
+                //Valida si todos los campos están llenos
+                if (receptor==null || paquetin==null || salida==null|| destino==null || estado==-1 || domicilio==null){
+                    JOptionPane.showMessageDialog(null,"Debe ingresar todos los datos en los campos requeridos, solo estarán habilitados los paneles que faltan por completar");
                     actualizarPanel();
                 }else {
-                    if (domicilio==null){
+                    /*
+                    * Valida si el envio va a ser entregado al receptor por domicilio
+                    * o tiene que ir a recoger el paquete
+                    * */
+                    if (entrega==null){
                         LocalDateTime l1 = LocalDateTime.now();
                         int id=Inicio.sistema.asignarIdEnvio();
-                        Envio nuevo=new Envio(id,estado,l1,p,receptor,paquetin,salida,destino,direccion);
+                        //Creo un objeto tipo Envio
+                        EnvioRecibidoDomicilio nuevo=new EnvioRecibidoDomicilio(id,estado,l1,p,receptor,paquetin,salida,
+                                destino,null,domicilio);
                         int opcion=cboSucursalSalida.getSelectedIndex();
                         String nombreS=nombreSucursal(opcion);
+                        //Agrego el envio al Sistema
                         Inicio.sistema.agregarEnvio(nuevo,nombreS);
                         JOptionPane.showMessageDialog(null,"Su Envio ha sido agregado, el ID de su envio es: " +
                                 ""+nuevo.getId()+" con este ID podrás hacer seguimiento de tu envio");
@@ -274,13 +314,16 @@ public class UsuarioEnvio {
                     }else{
                         LocalDateTime l1 = LocalDateTime.now();
                         int id=Inicio.sistema.asignarIdEnvio();
+                        //Creo un objeto tipo EnvioRecibidoDomicilio
                         EnvioRecibidoDomicilio nuevo= new EnvioRecibidoDomicilio(id,estado,l1,p,receptor,paquetin,salida,destino,
-                                direccion,domicilio);
+                                entrega,domicilio);
                         int opcion =cboSucursalSalida.getSelectedIndex();
                         String nombreS=nombreSucursal(opcion);
+                        //Agrego el envio al Sistema
                         Inicio.sistema.agregarEnvio(nuevo,nombreS);
                         JOptionPane.showMessageDialog(null,"Su Envio ha sido agregado, el ID de su envio es: " +
                                 ""+nuevo.getId()+" con este ID podrás hacer seguimiento de tu envio");
+                        //Regresa al panel de inicio de
                         JFrame este = (JFrame) SwingUtilities.getWindowAncestor(usuarioEnvio);
                         este.setContentPane(new UsuarioInicio(p).getUsuarioInicio());
                         este.revalidate();
@@ -298,18 +341,25 @@ public class UsuarioEnvio {
     /*
         Este método deshabilitará los paneles que ya estén los datos llenos
         Solo estarán habilitados los paneles que no estén llenos los datos para que pueda completar el proceso
+        NO FUNCIONA :(
      */
     public void actualizarPanel(){
-        if (receptor!=null || direccion!=null){
-            persona.setVisible(false);
+        if (receptor!=null || entrega!=null){
+            personaDatos.setVisible(false);
         }
         if (paquetin!=null){
-            paquete.setVisible(false);
+            datosPaquete.setVisible(false);
         }
         if ((salida!=null && destino!=null) || estado!=-1){
-            sucursal.setVisible(false);
+            sucursalDatos.setVisible(false);
         }
     }
+    /*
+    * Devuelve el nombre de la sucursal en la que estoy,
+        por culpa del Tony que crea métodos raros, debo implementar este método
+        * @param opcion
+        * @return nombre
+        * */
     public String nombreSucursal(int opcion){
         String nombre="";
         switch (opcion){

@@ -87,8 +87,8 @@ public class Sistema {
         //Envios
         Paquete p1 = new Paquete(new Dimension(10,10,10,10),"Paquete Prueba");
 
-        Envio e1 = new Envio(1,3, LocalDateTime.now(),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5));
-        Envio e2 = new Envio(2,0, LocalDateTime.of(2004, 12, 1, 12, 35, 34,4),maria,pedro,p1,sQuitoS,sQuitoN,new Direccion(5,5));
+        Envio e1 = new Envio(2461,3, LocalDateTime.now(),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5));
+        Envio e2 = new Envio(2462,0, LocalDateTime.of(2004, 12, 1, 12, 35, 34,4),maria,pedro,p1,sQuitoS,sQuitoN,new Direccion(5,5));
 
         envios.add(e1);
         envios.add(e2);
@@ -405,6 +405,51 @@ public class Sistema {
         idUnico= ultimo.getId()+1;
         return idUnico;
     }
+    /**
+     * Método para crear una lista de los envios que tiene un usuario en el sistema
+     * @param p
+     *  @return lista
+     */
+    public ArrayList enviosUsuario(Persona p){
+        ArrayList<Envio> lista= new ArrayList<>(envios);
+        ArrayList<Envio> nuevaLista=new ArrayList<>();
+        for (Envio e: lista){
+            if (e.getSolicitante().equals(p)){
+                nuevaLista.add(e);
+            }
+        }
+        return nuevaLista;
+    }
+    /**
+     * Método para mostrar el estado del paquete/Envio
+     * @param estado
+     *  @return resultado
+     */
+    public String mostrarEstadoPaquete(int estado){
+        String resultado="";
+        switch (estado){
+            case 0:
+                resultado="El paquete aún no ha sido retirado de su domicilio";
+                break;
+            case 1:
+                resultado="El paquete se encuentra en la oficina previo al envio";
+                break;
+            case 2:
+                resultado="El paquete está saliendo de oficina a la sucursal de destino";
+                break;
+            case 3:
+                resultado="El paquete llegó a la sucursal de destino";
+                break;
+            case 4:
+                resultado="El paquete está en camino al domicilio del receptor";
+                break;
+            case 5:
+                resultado="El paquete ha sido entregado";
+                break;
+        }
+        return resultado;
+    }
+
 
     /**
      * Metodo para remover el envio de la lista y removerlo de la lista de la

@@ -41,6 +41,17 @@ public class UsuarioInicio {
                 este.revalidate();
             }
         });
+        /*
+        Redirecciona a interfaz estado Paquete
+         */
+        btnEstadoPaquete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(usuarioInicio);
+                este.setContentPane(new estadoPaquete(p).getEstadoPaquete());
+                este.revalidate();
+            }
+        });
     }
 
     /*
