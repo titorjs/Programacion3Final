@@ -44,7 +44,8 @@ public class InicioEstibaje {
         /**
          * Redireccionar a pestaña para visualizar la lista de envios entre sucursales
          */
-        btnListarPSucursal.addActionListener(new ActionListener() {
+        btnListarPSucursal.addActionListener(new
+                                                     ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(principal);

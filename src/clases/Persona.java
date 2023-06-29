@@ -18,6 +18,7 @@ public class Persona implements Comparable<Persona>{
     }
 
     public String getNombre() {
+
         return nombre;
     }
 
@@ -60,6 +61,7 @@ public class Persona implements Comparable<Persona>{
      *         false: si la contraseña ingresada es incorrecta
      */
     public boolean validarContrasenia(String contrasenia){
+
         return this.contrasenia.equals(contrasenia);
     }
 

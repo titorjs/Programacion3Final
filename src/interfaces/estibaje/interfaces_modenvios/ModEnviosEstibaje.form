@@ -54,17 +54,6 @@
           <editable value="false"/>
         </properties>
       </component>
-      <component id="10008" class="javax.swing.JButton" binding="btnModReceptor">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <minimum-size width="50" height="20"/>
-          </grid>
-        </constraints>
-        <properties>
-          <enabled value="false"/>
-          <text value="Cambiar Persona Receptor"/>
-        </properties>
-      </component>
       <component id="a8cf1" class="javax.swing.JButton" binding="btnModDireccion">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
@@ -104,6 +93,17 @@
         <properties>
           <enabled value="false"/>
           <text value="Cambiar Paquete"/>
+        </properties>
+      </component>
+      <component id="10008" class="javax.swing.JButton" binding="btnModReceptor">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="50" height="20"/>
+          </grid>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <text value="Cambiar Persona Receptor"/>
         </properties>
       </component>
     </children>

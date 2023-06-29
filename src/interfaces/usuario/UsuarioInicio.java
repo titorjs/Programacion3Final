@@ -52,6 +52,14 @@ public class UsuarioInicio {
                 este.revalidate();
             }
         });
+        btnCancelarEntrega.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(usuarioInicio);
+                este.setContentPane(new cancelEntrega(p).getCancelEntrega());
+                este.revalidate();
+            }
+        });
     }
 
     /*
