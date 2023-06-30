@@ -174,24 +174,27 @@ public class UsuarioEnvio {
             public void actionPerformed(ActionEvent e) {
                 String nombre=txtNombreReceptor.getText(),
                         telefono=txtTelReceptor.getText();
-                try{
-                    //Valida el telefono
-                    Validaciones.validarTelefono(telefono);
-                    String cedula=txtCedulaVerificar.getText();
-                    double latitud=Double.parseDouble(txtLatitudDireccionDomicilio.getText()),
-                            longitud=Double.parseDouble(txtLongitudDireccionDomicilio.getText());
-                    /*
-                    * Crea una Persona temporal receptora, no está en el sistema
-                    * la contraseña la mando como "**" y el tipo de cuenta null
-                    * no se si sea correcto jajajaj
-                    * */
-                    receptor=new Persona(nombre,cedula,telefono,"**",null);
-                    domicilio=new Direccion(latitud,longitud);
-                    JOptionPane.showMessageDialog(null,"Datos del cliente temporal agregados");
-                }catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                if (nombre.equals("")){
+                    JOptionPane.showMessageDialog(null,"Llene todos los campos");
+                }else{
+                    try{
+                        //Valida el telefono
+                        Validaciones.validarTelefono(telefono);
+                        String cedula=txtCedulaVerificar.getText();
+                        double latitud=Double.parseDouble(txtLatitudDireccionDomicilio.getText()),
+                                longitud=Double.parseDouble(txtLongitudDireccionDomicilio.getText());
+                        /*
+                         * Crea una Persona temporal receptora, no está en el sistema
+                         * la contraseña la mando como "**" y el tipo de cuenta null
+                         * no se si sea correcto jajajaj
+                         * */
+                        receptor=new Persona(nombre,cedula,telefono,"**",null);
+                        domicilio=new Direccion(latitud,longitud);
+                        JOptionPane.showMessageDialog(null,"Datos del cliente temporal agregados");
+                    }catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }
                 }
-
             }
         });
         /*

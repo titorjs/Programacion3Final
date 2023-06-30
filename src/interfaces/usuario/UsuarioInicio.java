@@ -52,11 +52,25 @@ public class UsuarioInicio {
                 este.revalidate();
             }
         });
+        /**
+         * Redirecciona a interfaz cancelar entrega
+         */
         btnCancelarEntrega.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(usuarioInicio);
                 este.setContentPane(new cancelEntrega(p).getCancelEntrega());
+                este.revalidate();
+            }
+        });
+        /**
+         * Redirecciona a interfaz cambiar datos envio
+         */
+        btnCambiarDatosEnvio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(usuarioInicio);
+                este.setContentPane(new CambiarDatosEnvio(p).getCambiarDatosEnvio());
                 este.revalidate();
             }
         });
