@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jgrapht.core" level="project" />
+    <orderEntry type="library" name="piccolo2d.extras" level="project" />
   </component>
 </module>

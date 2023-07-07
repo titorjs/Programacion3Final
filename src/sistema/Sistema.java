@@ -325,6 +325,33 @@ public class Sistema {
     }
 
     /**
+     * Busca el chat entre dos usuarios en base a su cédula
+     * @param c1 Cédula de 1 de uno de los dos usuarios
+     * @param c2 Cédula del segundo usuario
+     * @return SortedSet con los mensajes entre ambos
+     */
+    public SortedSet<Mensaje> buscarChatEntre(String c1, String c2){
+        /** Buscar a las personas
+         *  !!! Podría reeemplarse con .getCédula del emisor/receptor */
+        Persona p1 = buscarUsuarioCedula(c1);
+        Persona p2 = buscarUsuarioCedula(c2);
+
+        SortedSet<Mensaje> resultado = new TreeSet<>();
+
+        /** Se recorre todos los mensajes y debe cumplir que c1 sea el emisor y
+         * c2 el receptor o viceversa */
+        for (Mensaje m: mensajes){
+            boolean b1 = m.getEmisor().equals(p1) && m.getReceptor().equals(p2);
+            boolean b2 = m.getEmisor().equals(p2) && m.getReceptor().equals(p1);
+            if (b1 || b2){
+                resultado.add(m);
+            }
+        }
+
+        return resultado;
+    }
+
+    /**
      * !!! Podría añadirse uno de busqueda por intervalo de fecha
      */
 
