@@ -2,6 +2,7 @@ package interfaces.usuario;
 
 import clases.Persona;
 import interfaces.Inicio;
+import interfaces.chat.BuscarChats;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ public class UsuarioInicio {
     private JButton btnCambiarDatosEnvio;
     private JTextField txtNombreFIjo;
     private JButton btnCerrarSesion;
+    private JButton btnChat;
 
 
     public UsuarioInicio(Persona p) {
@@ -71,6 +73,14 @@ public class UsuarioInicio {
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(usuarioInicio);
                 este.setContentPane(new CambiarDatosEnvio(p).getCambiarDatosEnvio());
+                este.revalidate();
+            }
+        });
+        btnChat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(usuarioInicio);
+                este.setContentPane(new BuscarChats(p).getBuscarChat());
                 este.revalidate();
             }
         });
