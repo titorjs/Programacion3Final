@@ -26,9 +26,16 @@ public class Direccion {
     }
 
     public static double distancia(Direccion d1, Direccion d2){
-        double x = Math.pow(d1.longitud - d1.longitud,2);
+        double x = Math.pow(d1.longitud - d2.longitud,2);
         double y = Math.pow(d1.latitud - d2.latitud,2);
         return Math.sqrt(x + y);
+    }
+
+    public static Direccion intermedio(Direccion d1, Direccion d2){
+        double x = (d1.longitud + d2.longitud) / 2;
+        double y = (d1.latitud + d2.latitud)/2;
+
+        return new Direccion(x, y);
     }
 
     @Override
