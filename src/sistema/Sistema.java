@@ -351,6 +351,10 @@ public class Sistema {
         return resultado;
     }
 
+    public boolean agregarMensaje(Mensaje m){
+        return mensajes.add(m);
+    }
+
     /**
      * !!! Podría añadirse uno de busqueda por intervalo de fecha
      */
