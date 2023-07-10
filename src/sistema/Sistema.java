@@ -424,6 +424,10 @@ public class Sistema {
         }
     }
 
+    public SortedSet<Envio> getEnvios() {
+        return envios;
+    }
+
     /**
      * Metodo para asignar id's únicas a los envios, se le suma 1 al último envio que hay en la lista
      * @return idUnico
@@ -570,7 +574,9 @@ public class Sistema {
     }
 
 
+
     public void generarListaEnviosSucursal(int idCamion){
+        buscarCamion(idCamion).getCarga().clear();
         for (Envio e:envios){
             if (e.getEstado()<3){
                 buscarCamion(idCamion).getCarga().add(e);
@@ -578,6 +584,7 @@ public class Sistema {
         }
     }
     public void generarListaEnviosEntrega(int idCamion){
+        buscarCamion(idCamion).getCarga().clear();
         Sucursales s;
         for (Envio e:envios){
             if (e.getEstado()==3 || e.getEstado()==4){
@@ -612,8 +619,8 @@ public class Sistema {
         }
         return null;
     }
-    public void agregarEnvioCamion(){
-
+    public void agregarEnvioCamion(Camion camion, Envio envio){
+        camion.getCarga().add(envio);
     }
 
 }

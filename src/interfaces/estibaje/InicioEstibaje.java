@@ -1,13 +1,16 @@
 package interfaces.estibaje;
 
+import interfaces.LoginEmpleados;
 import interfaces.estibaje.interfaces_ListasSucursales.ListaSucursales;
 import interfaces.estibaje.interfaces_camestados.EstadoPaquete;
+import interfaces.estibaje.interfaces_cargarCamiones.CargarCamiones;
 import interfaces.estibaje.interfaces_listaaentregar.ListaEntregar;
 import interfaces.estibaje.interfaces_modenvios.ModEnviosEstibaje;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 
 public class InicioEstibaje {
 
@@ -17,6 +20,8 @@ public class InicioEstibaje {
     private JButton btnEstadoPaquete;
     private JButton btnListarPSucursal;
     private JButton btnListaEnvios;
+    private JButton cargarCamionesButton;
+    private JButton cerrarSesionButton;
 
     public InicioEstibaje() {
         /**
@@ -61,6 +66,24 @@ public class InicioEstibaje {
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(principal);
                 este.setContentPane(new ListaEntregar().getJpListaEntregar());
+                este.revalidate();
+            }
+        });
+        cargarCamionesButton.addComponentListener(new ComponentAdapter() {
+        });
+        cargarCamionesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(principal);
+                este.setContentPane(new CargarCamiones().getCargarCamiones());
+                este.revalidate();
+            }
+        });
+        cerrarSesionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(principal);
+                este.setContentPane(new LoginEmpleados().getPanel());
                 este.revalidate();
             }
         });

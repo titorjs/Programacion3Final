@@ -41,15 +41,15 @@ public class ListaEntregar {
                 TreeSet<Envio> listaEnvios = (TreeSet<Envio>) Inicio.sistema.buscarCamion(2).getCarga();
                 TreeSet<Envio> aux = new TreeSet<>();
                 ArrayList<Sucursal> sucAux = new ArrayList<>();
-                String text ="";
-                sucAux=Inicio.sistema.getSucursales();
-                for (Envio envio: listaEnvios){
-                    if (envio.getSucursalEntrega().equals(sucAux.get(0))){
+                String text = "";
+                sucAux = Inicio.sistema.getSucursales();
+                for (Envio envio : listaEnvios) {
+                    if (envio.getSucursalEntrega().equals(sucAux.get(0))) {
                         aux.add(envio);
                     }
                 }
-                for (Envio lista:aux){
-                    text = text+"Envio" +
+                for (Envio lista : aux) {
+                    text = text + "Envio" +
                             "\nID: " + lista.getId() +
                             "\nestado: " + lista.getEstado() +
                             "\nfechaRecibido: " + lista.getFechaRecibido() +
@@ -60,7 +60,11 @@ public class ListaEntregar {
                             "\nsucursalEntrega: " + lista.getSucursalEntrega() +
                             "\ndireccionEntrega: " + lista.getDireccionEntrega();
                 }
-                txtEntregasInfo.setText(text);
+                if (text != "") {
+                    txtEntregasInfo.setText(text);
+                } else
+                    JOptionPane.showMessageDialog(null, "No existe ningun envio");
+
             }
         });
         btnEntregsaQuitoS.addActionListener(new ActionListener() {
@@ -71,15 +75,15 @@ public class ListaEntregar {
                 TreeSet<Envio> listaEnvios = (TreeSet<Envio>) Inicio.sistema.buscarCamion(2).getCarga();
                 TreeSet<Envio> aux = new TreeSet<>();
                 ArrayList<Sucursal> sucAux = new ArrayList<>();
-                String text ="";
-                sucAux=Inicio.sistema.getSucursales();
-                for (Envio envio: listaEnvios){
-                    if (envio.getSucursalEntrega().equals(sucAux.get(1))){
+                String text = "";
+                sucAux = Inicio.sistema.getSucursales();
+                for (Envio envio : listaEnvios) {
+                    if (envio.getSucursalEntrega().equals(sucAux.get(1))) {
                         aux.add(envio);
                     }
                 }
-                for (Envio lista:aux){
-                    text = text+"Envio" +
+                for (Envio lista : aux) {
+                    text = text + "Envio" +
                             "\nID: " + lista.getId() +
                             "\nestado: " + lista.getEstado() +
                             "\nfechaRecibido: " + lista.getFechaRecibido() +
@@ -90,7 +94,11 @@ public class ListaEntregar {
                             "\nsucursalEntrega: " + lista.getSucursalEntrega() +
                             "\ndireccionEntrega: " + lista.getDireccionEntrega();
                 }
-                txtEntregasInfo.setText(text);
+                if (text != "") {
+                    txtEntregasInfo.setText(text);
+                } else
+                    JOptionPane.showMessageDialog(null, "No existe ningun envio");
+
             }
         });
         btnEntregasGuayaquil.addActionListener(new ActionListener() {
@@ -101,15 +109,15 @@ public class ListaEntregar {
                 TreeSet<Envio> listaEnvios = (TreeSet<Envio>) Inicio.sistema.buscarCamion(2).getCarga();
                 TreeSet<Envio> aux = new TreeSet<>();
                 ArrayList<Sucursal> sucAux = new ArrayList<>();
-                String text ="";
-                sucAux=Inicio.sistema.getSucursales();
-                for (Envio envio: listaEnvios){
-                    if (envio.getSucursalEntrega().equals(sucAux.get(2))){
+                String text = "";
+                sucAux = Inicio.sistema.getSucursales();
+                for (Envio envio : listaEnvios) {
+                    if (envio.getSucursalEntrega().equals(sucAux.get(2))) {
                         aux.add(envio);
                     }
                 }
-                for (Envio lista:aux){
-                    text = text+"Envio" +
+                for (Envio lista : aux) {
+                    text = text + "Envio" +
                             "\nID: " + lista.getId() +
                             "\nestado: " + lista.getEstado() +
                             "\nfechaRecibido: " + lista.getFechaRecibido() +
@@ -120,7 +128,11 @@ public class ListaEntregar {
                             "\nsucursalEntrega: " + lista.getSucursalEntrega() +
                             "\ndireccionEntrega: " + lista.getDireccionEntrega();
                 }
-                txtEntregasInfo.setText(text);
+                if (text != "") {
+                    txtEntregasInfo.setText(text);
+                } else
+                    JOptionPane.showMessageDialog(null, "No existe ningun envio");
+
             }
         });
         btnEntregasDomingo.addActionListener(new ActionListener() {
@@ -131,15 +143,16 @@ public class ListaEntregar {
                 TreeSet<Envio> listaEnvios = (TreeSet<Envio>) Inicio.sistema.buscarCamion(2).getCarga();
                 TreeSet<Envio> aux = new TreeSet<>();
                 ArrayList<Sucursal> sucAux = new ArrayList<>();
-                String text ="";
-                sucAux=Inicio.sistema.getSucursales();
-                for (Envio envio: listaEnvios){
-                    if (envio.getSucursalEntrega().equals(sucAux.get(3))){
+                String text = "";
+                sucAux = Inicio.sistema.getSucursales();
+                for (Envio envio : listaEnvios) {
+                    if (envio.getSucursalEntrega().equals(sucAux.get(3))) {
                         aux.add(envio);
                     }
                 }
-                for (Envio lista:aux){
-                    text = text+"Envio" +
+
+                for (Envio lista : aux) {
+                    text = text + "Envio" +
                             "\nID: " + lista.getId() +
                             "\nestado: " + lista.getEstado() +
                             "\nfechaRecibido: " + lista.getFechaRecibido() +
@@ -150,7 +163,11 @@ public class ListaEntregar {
                             "\nsucursalEntrega: " + lista.getSucursalEntrega() +
                             "\ndireccionEntrega: " + lista.getDireccionEntrega();
                 }
-                txtEntregasInfo.setText(text);
+                if (text != "") {
+                    txtEntregasInfo.setText(text);
+                } else
+                    JOptionPane.showMessageDialog(null, "No existe ningun envio");
+
             }
         });
     }
