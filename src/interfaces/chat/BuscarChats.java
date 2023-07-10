@@ -5,11 +5,13 @@ import clases.Persona;
 import interfaces.Inicio;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 
 public class BuscarChats {
@@ -45,7 +47,7 @@ public class BuscarChats {
                         if (opt == JOptionPane.YES_OPTION) {
                             Persona nuevochat = Inicio.sistema.buscarUsuarioCedula(receptor);
                             JFrame este = (JFrame) SwingUtilities.getWindowAncestor(buscarChat);
-                            este.setContentPane(new Chat(per, nuevochat).getChatUsuarios());
+                            este.setContentPane(new Chat(per,nuevochat).getChatUsuarios());
                             este.revalidate();
                         }
                     }
@@ -65,6 +67,11 @@ public class BuscarChats {
                 Mensaje chatSeleccionado= (Mensaje) listChats.getSelectedValue();
                 if (chatSeleccionado==null){
                     JOptionPane.showMessageDialog(null,"Debes seleccionar un chat");
+                }
+                if (chatSeleccionado.getEmisor().getCedula().compareTo(per.getCedula()) == 0){
+                    JFrame este = (JFrame) SwingUtilities.getWindowAncestor(buscarChat);
+                    este.setContentPane(new Chat(per,chatSeleccionado.getReceptor()).getChatUsuarios());
+                    este.revalidate();
                 }
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(buscarChat);
                 este.setContentPane(new Chat(per,chatSeleccionado.getEmisor()).getChatUsuarios());
@@ -89,48 +96,47 @@ public class BuscarChats {
     public void llenarListaTotal(SortedSet<Mensaje> listaRecibidos, SortedSet<Mensaje> listaEnviados){
         dlm.removeAllElements();
         List<Mensaje> todosMensajes=new ArrayList<>();
-        boolean mensajereciente=false;
-
+        SortedSet<Mensaje> aux= new TreeSet<>();
+        todosMensajes.clear();
+        boolean existemensaje=false;
         for (Mensaje m:listaRecibidos){
-            Persona p1=m.getEmisor();
-            for (Mensaje aux:listaRecibidos){
-                Persona auxp=aux.getEmisor();
-                if (p1.getCedula().equals(auxp)){
-                    if (m.getEnviado().compareTo(aux.getEnviado())<0){
-                        m=aux;
-                    }
+            aux.clear();
+            Persona emisor =m.getEmisor();
+            Persona actual =m.getReceptor();
+            aux.addAll(Inicio.sistema.buscarChatEntre(emisor.getCedula(),actual.getCedula()));
+            for (Mensaje x:todosMensajes){
+                Persona p1=x.getEmisor();
+                Persona p2=x.getReceptor();
+                if ((p1.equals(aux.last().getEmisor()) && p2.equals(aux.last().getReceptor())) || (p1.equals(aux.last().getReceptor()) && p2.equals(aux.last().getEmisor()))){
+                    existemensaje=true;
+                    break;
                 }
+                existemensaje=false;
             }
-            todosMensajes.add(m);
+            if (existemensaje==false){
+                todosMensajes.add(aux.last());
+            }
         }
-
         for (Mensaje m:listaEnviados){
-            Persona p1=m.getReceptor();
-            for (Mensaje aux:listaEnviados){
-                Persona auxp=aux.getReceptor();
-                if (p1.getCedula().equals(auxp)){
-                    if (m.getEnviado().compareTo(aux.getEnviado())<0){
-                        m=aux;
-                    }
+            aux.clear();
+            Persona actual =m.getEmisor();
+            Persona receptor =m.getReceptor();
+            aux.addAll(Inicio.sistema.buscarChatEntre(receptor.getCedula(),actual.getCedula()));
+            for (Mensaje x:todosMensajes){
+                Persona p1=x.getEmisor();
+                Persona p2=x.getReceptor();
+                if ((p1.equals(aux.last().getEmisor()) && p2.equals(aux.last().getReceptor())) || (p1.equals(aux.last().getReceptor()) && p2.equals(aux.last().getEmisor()))){
+                    existemensaje=true;
+                    break;
                 }
+                existemensaje=false;
             }
-            todosMensajes.add(m);
+            if (existemensaje==false){
+                todosMensajes.add(aux.last());
+            }
         }
 
         for (Mensaje m:todosMensajes){
-            Persona p1=m.getEmisor();
-            Persona p2=m.getReceptor();
-            for (Mensaje aux:todosMensajes){
-                Persona auxp1=aux.getEmisor();
-                Persona auxp2=aux.getReceptor();
-                boolean caso1=p1.getCedula().equals(auxp1) && p2.getCedula().equals(auxp2);
-                boolean caso2=p1.getCedula().equals(auxp2) && p2.getCedula().equals(auxp1);
-                if (caso1 || caso2){
-                    if (m.getEnviado().compareTo(aux.getEnviado())>0){
-                        m=aux;
-                    }
-                }
-            }
             dlm.addElement(m);
         }
         listChats.setModel(dlm);
