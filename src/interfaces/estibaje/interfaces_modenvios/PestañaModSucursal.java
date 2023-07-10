@@ -1,6 +1,7 @@
 package interfaces.estibaje.interfaces_modenvios;
 
 import clases.Envio;
+import clases.Persona;
 import clases.Sucursal;
 import interfaces.Inicio;
 
@@ -18,7 +19,7 @@ public class PestañaModSucursal {
         return jpModSucursal;
     }
 
-    public PestañaModSucursal( Envio envio) {
+    public PestañaModSucursal(Envio envio, Persona p) {
         /**
          * Redireccionar a modificar envios
          */
@@ -26,7 +27,7 @@ public class PestañaModSucursal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModSucursal);
-                este.setContentPane(new ModEnviosEstibaje().getPanel());
+                este.setContentPane(new ModEnviosEstibaje(p).getPanel());
                 este.revalidate();
             }
         });

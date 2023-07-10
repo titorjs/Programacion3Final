@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import clases.Envio;
+import clases.Persona;
 import interfaces.Inicio;
 import interfaces.estibaje.InicioEstibaje;
 
@@ -20,7 +21,7 @@ public class ModEnviosEstibaje {
     private JButton btnCambiarSucursalEntrega;
     private Envio envio;
 
-    public ModEnviosEstibaje() {
+    public ModEnviosEstibaje(Persona p) {
         /** !!! Hacer que si el paquete a modificar es null, no sea visible los botones */
 
         envio = null;
@@ -32,7 +33,7 @@ public class ModEnviosEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                este.setContentPane(new InicioEstibaje().getPanel());
+                este.setContentPane(new InicioEstibaje(p).getPanel());
                 este.revalidate();
             }
         });
@@ -84,7 +85,7 @@ public class ModEnviosEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                este.setContentPane(new PestañaModReceptor(envio).getJpPestañaModReceptor());
+                este.setContentPane(new PestañaModReceptor(envio,p).getJpPestañaModReceptor());
                 este.revalidate();
             }
         });
@@ -95,7 +96,7 @@ public class ModEnviosEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                este.setContentPane(new PestañaModDireccion(envio).getJpPestañaModDireccion());
+                este.setContentPane(new PestañaModDireccion(envio,p).getJpPestañaModDireccion());
                 este.revalidate();
             }
         });
@@ -106,7 +107,7 @@ public class ModEnviosEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                este.setContentPane(new PestañaModSucursal(envio).getJpModSucursal());
+                este.setContentPane(new PestañaModSucursal(envio,p).getJpModSucursal());
                 este.revalidate();
 
             }
@@ -115,7 +116,7 @@ public class ModEnviosEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModEnviosEstibaje);
-                este.setContentPane(new PestañaModPaquete(envio).getJpModPaquete());
+                este.setContentPane(new PestañaModPaquete(envio,p).getJpModPaquete());
                 este.revalidate();
             }
         });

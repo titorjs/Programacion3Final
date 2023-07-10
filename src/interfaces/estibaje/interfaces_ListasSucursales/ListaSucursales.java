@@ -1,9 +1,6 @@
 package interfaces.estibaje.interfaces_ListasSucursales;
 
-import clases.Camion;
-import clases.Envio;
-import clases.Sucursal;
-import clases.Sucursales;
+import clases.*;
 import interfaces.Inicio;
 import interfaces.estibaje.InicioEstibaje;
 
@@ -32,7 +29,7 @@ public class ListaSucursales {
         return jpListaSucursales;
     }
 
-    public ListaSucursales() {
+    public ListaSucursales(Persona p) {
         /**
          * Redireccionar al Inicio de estibaje
          */
@@ -40,7 +37,7 @@ public class ListaSucursales {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpListaSucursales);
-                este.setContentPane(new InicioEstibaje().getPanel());
+                este.setContentPane(new InicioEstibaje(p).getPanel());
                 este.revalidate();
             }
         });

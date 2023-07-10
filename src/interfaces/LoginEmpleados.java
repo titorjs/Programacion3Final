@@ -78,7 +78,7 @@ public class LoginEmpleados {
                                                 //!!!
                                                 break;
                                             case ESTIBAJE:
-                                                panel = new InicioEstibaje().getPanel();
+                                                panel = new InicioEstibaje(p).getPanel();
                                                 break;
                                             case CONDUCTOR:
 

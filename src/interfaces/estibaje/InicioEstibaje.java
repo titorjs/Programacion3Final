@@ -1,6 +1,9 @@
 package interfaces.estibaje;
 
+import clases.Persona;
+import interfaces.Inicio;
 import interfaces.LoginEmpleados;
+import interfaces.chat.BuscarChats;
 import interfaces.estibaje.interfaces_ListasSucursales.ListaSucursales;
 import interfaces.estibaje.interfaces_camestados.EstadoPaquete;
 import interfaces.estibaje.interfaces_cargarCamiones.CargarCamiones;
@@ -22,8 +25,9 @@ public class InicioEstibaje {
     private JButton btnListaEnvios;
     private JButton cargarCamionesButton;
     private JButton cerrarSesionButton;
+    private JButton btnChat;
 
-    public InicioEstibaje() {
+    public InicioEstibaje(Persona p) {
         /**
          * Redireccion a al Incio de modificar envios de estibaje
          */
@@ -31,7 +35,7 @@ public class InicioEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame esto = (JFrame) SwingUtilities.getWindowAncestor(principal);
-                esto.setContentPane(new ModEnviosEstibaje().getPanel());
+                esto.setContentPane(new ModEnviosEstibaje(p).getPanel());
                 esto.revalidate();
             }
         });
@@ -42,7 +46,7 @@ public class InicioEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este=(JFrame) SwingUtilities.getWindowAncestor(principal);
-                este.setContentPane(new EstadoPaquete().getJpCambiarEstado());
+                este.setContentPane(new EstadoPaquete(p).getJpCambiarEstado());
                 este.revalidate();
             }
         });
@@ -54,7 +58,7 @@ public class InicioEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(principal);
-                este.setContentPane(new ListaSucursales().getJpListaSucursales());
+                este.setContentPane(new ListaSucursales(p).getJpListaSucursales());
                 este.revalidate();
             }
         });
@@ -65,7 +69,7 @@ public class InicioEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(principal);
-                este.setContentPane(new ListaEntregar().getJpListaEntregar());
+                este.setContentPane(new ListaEntregar(p).getJpListaEntregar());
                 este.revalidate();
             }
         });
@@ -75,7 +79,7 @@ public class InicioEstibaje {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(principal);
-                este.setContentPane(new CargarCamiones().getCargarCamiones());
+                este.setContentPane(new CargarCamiones(p).getCargarCamiones());
                 este.revalidate();
             }
         });
@@ -84,6 +88,14 @@ public class InicioEstibaje {
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(principal);
                 este.setContentPane(new LoginEmpleados().getPanel());
+                este.revalidate();
+            }
+        });
+        btnChat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(principal);
+                este.setContentPane(new BuscarChats(p).getBuscarChat());
                 este.revalidate();
             }
         });

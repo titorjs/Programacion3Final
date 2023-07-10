@@ -1,6 +1,7 @@
 package interfaces.estibaje.interfaces_camestados;
 
 import clases.Envio;
+import clases.Persona;
 import interfaces.Inicio;
 import interfaces.estibaje.InicioEstibaje;
 import interfaces.estibaje.interfaces_modenvios.PestañaModSucursal;
@@ -18,13 +19,13 @@ public class EstadoPaquete {
     private JButton btnActualizarEstado;
     private JButton btnCamEstadoaInicio;
 
-    public EstadoPaquete() {
+    public EstadoPaquete(Persona p) {
         /** !!! visualización de información de envio antes de modificar estado */
         btnCamEstadoaInicio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpCambiarEstado);
-                este.setContentPane(new InicioEstibaje().getPanel());
+                este.setContentPane(new InicioEstibaje(p).getPanel());
                 este.revalidate();
             }
         });

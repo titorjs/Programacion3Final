@@ -3,6 +3,7 @@ package interfaces.estibaje.interfaces_modenvios;
 import clases.Dimension;
 import clases.Envio;
 import clases.Paquete;
+import clases.Persona;
 import interfaces.Inicio;
 
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class PestañaModPaquete {
         return jpModPaquete;
     }
 
-    public PestañaModPaquete(Envio envio) {
+    public PestañaModPaquete(Envio envio, Persona p) {
     btnPaqaEnvios.addActionListener(new ActionListener() {
         /**
          * BOTON PARA REGRESAR A LA PESTAÑA DE ENVIOS ESTIBAJE
@@ -33,7 +34,7 @@ public class PestañaModPaquete {
         @Override
         public void actionPerformed(ActionEvent e) {
             JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpModPaquete);
-            este.setContentPane(new ModEnviosEstibaje().getPanel());
+            este.setContentPane(new ModEnviosEstibaje(p).getPanel());
             este.revalidate();
         }
     });

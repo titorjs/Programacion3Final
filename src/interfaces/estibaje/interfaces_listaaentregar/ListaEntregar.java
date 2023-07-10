@@ -2,6 +2,7 @@ package interfaces.estibaje.interfaces_listaaentregar;
 
 import clases.Camion;
 import clases.Envio;
+import clases.Persona;
 import clases.Sucursal;
 import interfaces.Inicio;
 import interfaces.estibaje.InicioEstibaje;
@@ -21,7 +22,7 @@ public class ListaEntregar {
     private JTextArea txtEntregasInfo;
     private JButton btnListaEntregaraEstibaje;
 
-    public ListaEntregar() {
+    public ListaEntregar(Persona p) {
         /**
          * Redireccionar a incio de estibaje
          */
@@ -29,7 +30,7 @@ public class ListaEntregar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpListaEntregar);
-                este.setContentPane(new InicioEstibaje().getPanel());
+                este.setContentPane(new InicioEstibaje(p).getPanel());
                 este.revalidate();
             }
         });

@@ -1,6 +1,7 @@
 package interfaces.estibaje.interfaces_cargarCamiones;
 
 import clases.Envio;
+import clases.Persona;
 import interfaces.Inicio;
 import interfaces.estibaje.InicioEstibaje;
 
@@ -19,7 +20,7 @@ public class CargarCamiones {
     private JButton btnCargarEnvioSucursal;
     private JButton btnRegresarCS;
 
-    public CargarCamiones() {
+    public CargarCamiones(Persona p) {
         mostrarEnviosASucursal();
         mostrarEnviosADomicilio();
         btnCargarEnvioDomicilio.addActionListener(new ActionListener() {
@@ -34,7 +35,7 @@ public class CargarCamiones {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(cargarCamiones);
-                este.setContentPane(new InicioEstibaje().getPanel());
+                este.setContentPane(new InicioEstibaje(p).getPanel());
                 este.revalidate();
             }
         });
@@ -50,7 +51,7 @@ public class CargarCamiones {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(cargarCamiones);
-                este.setContentPane(new InicioEstibaje().getPanel());
+                este.setContentPane(new InicioEstibaje(p).getPanel());
                 este.revalidate();
             }
         });

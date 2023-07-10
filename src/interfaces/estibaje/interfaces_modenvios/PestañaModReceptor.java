@@ -22,7 +22,7 @@ public class PestañaModReceptor {
     private JButton btnRecaEnvios1;
     private JButton btnRecaEnvios2;
 
-    public PestañaModReceptor(Envio envio) {
+    public PestañaModReceptor(Envio envio,Persona p) {
         /**
          * Botones para redireccionar a Pestaña de Modifcar envios
          */
@@ -30,7 +30,7 @@ public class PestañaModReceptor {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpPestañaModReceptor);
-                este.setContentPane(new ModEnviosEstibaje().getPanel());
+                este.setContentPane(new ModEnviosEstibaje(p).getPanel());
                 este.revalidate();
             }
         });
@@ -38,7 +38,7 @@ public class PestañaModReceptor {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame este = (JFrame) SwingUtilities.getWindowAncestor(jpPestañaModReceptor);
-                este.setContentPane(new ModEnviosEstibaje().getPanel());
+                este.setContentPane(new ModEnviosEstibaje(p).getPanel());
                 este.revalidate();
             }
         });
