@@ -28,7 +28,7 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Visualizar Envios a QuitoNorte"/>
+          <text value="Envios a QuitoNorte"/>
         </properties>
       </component>
       <component id="c712d" class="javax.swing.JButton" binding="btnVisualizarQSur">
@@ -36,7 +36,7 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Visualizar Envios a Quito Sur"/>
+          <text value="Envios a Quito Sur"/>
         </properties>
       </component>
       <component id="503ed" class="javax.swing.JButton" binding="btnVisualizarDomingo">
@@ -44,7 +44,7 @@
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Visualizar Envios a Sto.Domingo"/>
+          <text value="Envios a Sto.Domingo"/>
         </properties>
       </component>
       <component id="40c33" class="javax.swing.JButton" binding="btnVisualizarGuayaquil">
@@ -52,7 +52,7 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Visualizar Envios a Guayaquil"/>
+          <text value="Envios a Guayaquil"/>
         </properties>
       </component>
       <component id="df607" class="javax.swing.JTextArea" binding="txtAInfoEnviosSucursales">
