@@ -518,6 +518,7 @@
                   <model>
                     <item value="Vial"/>
                     <item value="Servicio"/>
+                    <item value="Pánico"/>
                   </model>
                   <selectedIndex value="0"/>
                 </properties>

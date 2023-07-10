@@ -2,7 +2,12 @@ package interfaces.chat;
 
 import clases.Mensaje;
 import clases.Persona;
+import clases.TipoCuenta;
 import interfaces.Inicio;
+import interfaces.conductor.InicioConductor;
+import interfaces.estibaje.InicioEstibaje;
+import interfaces.repartidor.InicioRepartidor;
+import interfaces.usuario.UsuarioInicio;
 
 import javax.swing.*;
 import java.awt.*;
@@ -85,6 +90,35 @@ public class BuscarChats {
             @Override
             public void actionPerformed(ActionEvent e) {
                 llenarListaTotal(Inicio.sistema.buscarMensajesReceptor(per.getCedula()), Inicio.sistema.buscarMensajesEmisor(per.getCedula()));
+            }
+        });
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TipoCuenta tipo = per.getTipo();
+                JPanel panel;
+                //Redirigir según el tipo de cuenta
+                switch (tipo){
+                    case USUARIO:
+                        panel = new UsuarioInicio(per).getUsuarioInicio();
+                        break;
+                    case REPARTIDOR:
+                        panel = new InicioRepartidor(per).getPanel();
+                        break;
+                    case ESTIBAJE:
+                        panel = new InicioEstibaje().getPanel();
+                        break;
+                    case CONDUCTOR:
+                        panel = new InicioConductor(per).getPanel();
+                        break;
+                    default:
+                        panel = new Inicio().getPanel();
+                        JOptionPane.showMessageDialog(null, "Error inesperado, será redirigido al inicio");
+                }
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(buscarChat);
+                este.setContentPane(panel);
+                este.revalidate();
+
             }
         });
     }

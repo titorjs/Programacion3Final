@@ -105,6 +105,8 @@ public class Sistema {
         //Camiones
         Camion camion = new Camion(1,new TreeSet<Envio>(), carlos);
         Camion camion2 = new Camion(2,new TreeSet<Envio>(), jaime);
+        camion.getCarga().add(e1);
+        camion.getCarga().add(e2);
         camion2.getCarga().add(e1);
         camion2.getCarga().add(e2);
 
