@@ -1,5 +1,6 @@
 package sistema;
 import clases.*;
+import sistema.mapa.Mapa;
 
 import java.lang.ref.SoftReference;
 import java.lang.reflect.Array;
@@ -19,6 +20,7 @@ public class Sistema {
     private SortedSet<Mensaje> mensajes;
     private ArrayList<ReporteServicios> reporteServicios;
     private ArrayList<ReporteVia> reporteVias;
+    private ArrayList<Mapa> mapas;
 
     /**
      * Siempre debe tener como cédula el valor 00000000
@@ -41,11 +43,18 @@ public class Sistema {
         mensajes = new TreeSet<>();
         reporteServicios = new ArrayList<>();
         reporteVias = new ArrayList<>();
+        mapas = new ArrayList<>();
 
         /**
          * !!! Valores de prueba
          */
 
+        //Mapas
+        for (Sucursales s: Sucursales.values()){
+            Mapa m = new Mapa();
+            m.setSucursal(s);
+            mapas.add(m);
+        }
 
         //Usuarios
         admin = new Persona("Nombre del administrador","0000000000", "1234567890", "admin", TipoCuenta.ADMINISTRADOR);
@@ -87,15 +96,17 @@ public class Sistema {
         //Envios
         Paquete p1 = new Paquete(new Dimension(10,10,10,10),"Paquete Prueba");
 
-        Envio e1 = new Envio(2461,3, LocalDateTime.now(),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(5,5));
-        Envio e2 = new Envio(2462,0, LocalDateTime.of(2004, 12, 1, 12, 35, 34,4),maria,pedro,p1,sQuitoS,sQuitoN,new Direccion(5,5));
+        Envio e1 = new Envio(2461,3, LocalDateTime.now(),maria,pedro,p1,sQuitoS,sQuitoS,new Direccion(150,250));
+        Envio e2 = new Envio(2462,0, LocalDateTime.of(2004, 12, 1, 12, 35, 34,4),maria,pedro,p1,sQuitoS,sQuitoN,new Direccion(350,450));
 
         envios.add(e1);
         envios.add(e2);
 
         //Camiones
-        Camion camion = new Camion(1,new TreeSet(), carlos);
-        Camion camion2 = new Camion(2,new TreeSet(), jaime);
+        Camion camion = new Camion(1,new TreeSet<Envio>(), carlos);
+        Camion camion2 = new Camion(2,new TreeSet<Envio>(), jaime);
+        camion2.getCarga().add(e1);
+        camion2.getCarga().add(e2);
 
         camiones.add(camion2);
         camiones.add(camion);
@@ -136,6 +147,18 @@ public class Sistema {
         reporteServicios.add(rs1);
         reporteServicios.add(rs2);
 
+    }
+
+    /**
+     * METODOS REFERENTES A MANEJO DE MAPAS
+     */
+
+    public Mapa buscarMapa(Sucursales s){
+        for(Mapa m: mapas){
+            if (m.getSucursal().equals(s))
+                return m;
+        }
+        return null;
     }
 
     /**
@@ -572,9 +595,6 @@ public class Sistema {
             e.setEstado(2);
         }
     }
-
-
-
     public void generarListaEnviosSucursal(int idCamion){
         buscarCamion(idCamion).getCarga().clear();
         for (Envio e:envios){
@@ -619,8 +639,14 @@ public class Sistema {
         }
         return null;
     }
+    public Camion buscarCamion(Persona p){
+        for (Camion c: camiones){
+            if (c.getConductor().equals(p))
+                return c;
+        }
+        return null;
+    }
     public void agregarEnvioCamion(Camion camion, Envio envio){
         camion.getCarga().add(envio);
     }
-
 }

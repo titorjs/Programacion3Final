@@ -1,6 +1,7 @@
 package sistema.mapa;
 import clases.Direccion;
 
+import clases.Sucursales;
 import edu.umd.cs.piccolo.PCanvas;
 import edu.umd.cs.piccolo.nodes.PPath;
 import edu.umd.cs.piccolo.nodes.PText;
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class Mapa extends PCanvas{
-    private Graph<Direccion, Calle> graph ;
+    private Graph<Direccion, Calle> graph;
+    private Sucursales sucursal;
     public Mapa() {
         this.graph = new SimpleWeightedGraph<>(Calle.class);
 
@@ -44,11 +46,17 @@ public class Mapa extends PCanvas{
             }
         }
     }
-    public Mapa(Graph<Direccion, Calle> graph){
+    public Mapa(Graph<Direccion, Calle> graph, Sucursales sucursal){
         this.graph = graph;
     }
     public Graph<Direccion, Calle> getGraph() {
         return graph;
+    }
+    public Sucursales getSucursal() {
+        return sucursal;
+    }
+    public void setSucursal(Sucursales sucursal){
+        this.sucursal = sucursal;
     }
     public void addLine(int x1, int y1, int x2, int y2, Color color) {
         PPath line = PPath.createLine(x1, y1, x2, y2);
@@ -162,6 +170,7 @@ public class Mapa extends PCanvas{
     }
     public ArrayList<Calle> buscarRutaOptima(ArrayList<Direccion> puntos, Direccion inicio){
         ArrayList<Calle> ruta = new ArrayList<>();
+        inicio = buscarVertice(inicio);
 
         DijkstraShortestPath<Direccion, Calle> shortestPath = new DijkstraShortestPath<>(graph);
         double corta = Float.MAX_VALUE;

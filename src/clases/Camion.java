@@ -4,7 +4,7 @@ import java.util.SortedSet;
 
 public class Camion implements Comparable<Camion>{
     private int id;
-    private SortedSet carga;
+    private SortedSet<Envio> carga;
     private Persona conductor;
 
     public Camion(int id, SortedSet carga, Persona conductor) {
@@ -21,7 +21,7 @@ public class Camion implements Comparable<Camion>{
         this.id = id;
     }
 
-    public SortedSet getCarga() {
+    public SortedSet<Envio> getCarga() {
         return carga;
     }
 

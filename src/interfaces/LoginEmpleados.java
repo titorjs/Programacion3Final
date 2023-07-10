@@ -3,7 +3,9 @@ package interfaces;
 import clases.Persona;
 import clases.TipoCuenta;
 import interfaces.admin.InicioAdmin;
+import interfaces.conductor.InicioConductor;
 import interfaces.estibaje.InicioEstibaje;
+import interfaces.repartidor.InicioRepartidor;
 import sistema.Validaciones;
 
 import javax.swing.*;
@@ -75,13 +77,13 @@ public class LoginEmpleados {
                                                 //!!!
                                                 break;
                                             case REPARTIDOR:
-                                                //!!!
+                                                panel = new InicioRepartidor(p).getPanel();
                                                 break;
                                             case ESTIBAJE:
                                                 panel = new InicioEstibaje().getPanel();
                                                 break;
                                             case CONDUCTOR:
-
+                                                panel = new InicioConductor(p).getPanel();
                                                 break;
                                         }
                                         /**
