@@ -19,8 +19,8 @@ public class Chat {
     private JTextField txtMensaje;
     private JScrollPane JScrollChat;
 public Chat(Persona p1, Persona p2) {
-
-    txtAreaInfoUsuario.setText(p2.toString());
+    txtAreaInfoUsuario.setEnabled(false);
+    txtAreaInfoUsuario.setText("Nombre: "+p2.getNombre()+"\nCédula: "+p2.getCedula()+"\nTipo de cuenta: "+p2.getTipo().name());
     String resultado = "";
     for (Mensaje m :Inicio.sistema.buscarChatEntre(p1.getCedula(),p2.getCedula())){
         resultado += m.toString() +"\n";

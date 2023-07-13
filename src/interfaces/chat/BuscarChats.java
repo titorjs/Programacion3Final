@@ -8,6 +8,7 @@ import interfaces.conductor.InicioConductor;
 import interfaces.estibaje.InicioEstibaje;
 import interfaces.repartidor.InicioRepartidor;
 import interfaces.usuario.UsuarioInicio;
+import sistema.Validaciones;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,25 +41,40 @@ public class BuscarChats {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String receptor=txtBuscarChat.getText();
-                /**Valdia que la cedula este en el sistema*/
-                if (Inicio.sistema.buscarUsuarioCedula(receptor)!=null){
-                    /**Comprueba si existe un chat con ese usario y si no existe, le da la opcion de
-                     * crear un nuevo chat con ese usario
-                     */
-                    boolean existechat = llenarLista(Inicio.sistema.buscarChatEntre(per.getCedula(), receptor));
-                    if ( existechat== false) {
-                        int opt = JOptionPane.showOptionDialog(null, "No tienes un chat con ese usuario. ¿Deseas crear uno?","Crear chat",
-                                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Sí", "No"}, "Sí");
-                        if (opt == JOptionPane.YES_OPTION) {
-                            Persona nuevochat = Inicio.sistema.buscarUsuarioCedula(receptor);
-                            JFrame este = (JFrame) SwingUtilities.getWindowAncestor(buscarChat);
-                            este.setContentPane(new Chat(per,nuevochat).getChatUsuarios());
-                            este.revalidate();
+                if (receptor.equals("")){
+                    JOptionPane.showMessageDialog(null,"Llene todos los campos correctamente");
+                }else{
+                    try {
+                        /** Validación cédula */
+                        boolean validacion = Validaciones.cedulaValida(receptor);
+                        if (validacion) {
+                            /** !!! La validación de si la cédula ya existe  */
+                            /**Valida que la cedula este en el sistema*/
+                            if (Inicio.sistema.buscarUsuarioCedula(receptor)!=null){
+                                /**Comprueba si existe un chat con ese usario y si no existe, le da la opcion de
+                                 * crear un nuevo chat con ese usario
+                                 */
+                                boolean existechat = llenarLista(Inicio.sistema.buscarChatEntre(per.getCedula(), receptor));
+                                if ( existechat== false) {
+                                    int opt = JOptionPane.showOptionDialog(null, "No tienes un chat con ese usuario. ¿Deseas crear uno?","Crear chat",
+                                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Sí", "No"}, "Sí");
+                                    if (opt == JOptionPane.YES_OPTION) {
+                                        Persona nuevochat = Inicio.sistema.buscarUsuarioCedula(receptor);
+                                        JFrame este = (JFrame) SwingUtilities.getWindowAncestor(buscarChat);
+                                        este.setContentPane(new Chat(per,nuevochat).getChatUsuarios());
+                                        este.revalidate();
+                                    }
+                                }
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(null,"No existe un usuario con esa cedula");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "La cédula ingresada es inválida.");
                         }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
-                }
-                else {
-                    JOptionPane.showMessageDialog(null,"No existe un usuario con esa cedula");
                 }
             }
         });
