@@ -2,13 +2,12 @@ package interfaces.conductor;
 
 import clases.*;
 import interfaces.Inicio;
-import sistema.mapa.Mapa;
+import interfaces.chat.BuscarChats;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
-import java.util.SortedSet;
 import java.util.Stack;
 
 public class InicioConductor {
@@ -20,6 +19,7 @@ public class InicioConductor {
     private JTextArea txaReportes;
     private JButton btnActualizarCarga;
     private JTextArea txtCarga;
+    private JButton btnChat;
 
     public InicioConductor(Persona p) {
 
@@ -39,6 +39,7 @@ public class InicioConductor {
             public void actionPerformed(ActionEvent e) {
                 Reporte r = new Reporte(p, LocalDateTime.now(), "botonPanico",true);
                 Inicio.sistema.agregarMensaje(r);
+                JOptionPane.showMessageDialog(null, "Reporte de pánico enviado");
             }
         });
         /** Mostrar reportes */
@@ -80,6 +81,14 @@ public class InicioConductor {
                         }
                     }
                 }
+            }
+        });
+        btnChat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(InicioConducto);
+                este.setContentPane(new BuscarChats(p).getBuscarChat());
+                este.revalidate();
             }
         });
     }
