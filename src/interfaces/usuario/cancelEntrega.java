@@ -69,7 +69,7 @@ public class cancelEntrega {
                                         "\t Descripción:  "+ en.getPaquete().getDetalle()+"\n Si cancela el envio se le generara una multa a pagar en oficina", "Confirmación de cancelación",JOptionPane.YES_NO_OPTION);
                                 if(opcion==0){
                                     Inicio.sistema.removerEnvio(en);
-                                    Mensaje m = new Mensaje(Inicio.sistema.buscarUsuarioCedula("0000000000"), p, "Ha sido multad@ con 5 dolares, porfavor hacercarse a pagar a la oficina", LocalDateTime.now());
+                                    Mensaje m = new Mensaje(Inicio.sistema.buscarUsuarioCedula("0000000000"),p, "Ha sido multad@ con 5 dolares, porfavor hacercarse a pagar a la oficina", LocalDateTime.now());
                                     multas.add(m);
                                     JOptionPane.showMessageDialog(null,"El envio ha sido cancelado"+m.getMensaje());
                                 }else {

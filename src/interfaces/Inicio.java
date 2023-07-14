@@ -2,6 +2,7 @@ package interfaces;
 
 import clases.Persona;
 import clases.TipoCuenta;
+import interfaces.usuario.verPaquete;
 import sistema.Sistema;
 import sistema.Validaciones;
 import interfaces.usuario.UsuarioInicio;
@@ -10,6 +11,7 @@ import interfaces.usuario.UsuarioLogin;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.channels.OverlappingFileLockException;
 
 public class Inicio {
     private JPanel inicio;
@@ -26,7 +28,12 @@ public class Inicio {
         btnVerPaquete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                /**
+                 * Nos redirecciona a ver el paquete sin tener que loguearnos
+                 */
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(inicio);
+                este.setContentPane(new verPaquete().getVerPaquete());
+                este.revalidate();
             }
         });
 
