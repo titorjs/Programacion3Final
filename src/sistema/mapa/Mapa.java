@@ -26,6 +26,7 @@ public class Mapa extends PCanvas{
         setBounds(0, 0, 1500, 1500);
         centrar();
 
+
         /**
          * Inicializar con datos aleatorios una ciudad rectangular
          */

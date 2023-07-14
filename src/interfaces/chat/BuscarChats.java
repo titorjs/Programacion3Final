@@ -106,7 +106,7 @@ public class BuscarChats {
                         panel = new InicioRepartidor(per).getPanel();
                         break;
                     case ESTIBAJE:
-                        panel = new InicioEstibaje().getPanel();
+                        panel = new InicioEstibaje(per).getPanel();
                         break;
                     case CONDUCTOR:
                         panel = new InicioConductor(per).getPanel();
