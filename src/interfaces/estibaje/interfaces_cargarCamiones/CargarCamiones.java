@@ -61,7 +61,7 @@ public class CargarCamiones {
                 Envio envioSeleccionado= (Envio) jlEnviosCD.getSelectedValue();
                 listaDomicilio.remove(envioSeleccionado);
                 envioSeleccionado.setEstado(4);
-
+                listModelD.removeAllElements();
                 Inicio.sistema.agregarEnvioCamion(4,envioSeleccionado);
                 if (actualizar==1){
                     mostrarEnviosDomicilioQN();
