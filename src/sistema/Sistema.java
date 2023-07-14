@@ -115,6 +115,8 @@ public class Sistema {
 
         camiones.add(camion2);
         camiones.add(camion);
+        camiones.add(camion3);
+        camiones.add(camion4);
 
         //Mensajes
 
