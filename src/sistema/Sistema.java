@@ -65,6 +65,7 @@ public class Sistema {
         Persona tito = new Persona("Tito Jaramillo", "2350999039", "0996693539", "1q2w3e4r",TipoCuenta.ESTIBAJE);
         Persona tony = new Persona("Tony Chen","1724375371","0958665421","tonychen777",TipoCuenta.ESTIBAJE);
         Persona jaime = new Persona("Jaime", "1010101051", "0996693539", "1q2w3e4r",TipoCuenta.REPARTIDOR);
+        Persona sebas = new Persona("Sebas","1010101011","0957777777","123456",TipoCuenta.CONDUCTOR);
 
         usuarios.add(tito);
         usuarios.add(maria);
@@ -105,6 +106,8 @@ public class Sistema {
         //Camiones
         Camion camion = new Camion(1,new TreeSet<Envio>(), carlos);
         Camion camion2 = new Camion(2,new TreeSet<Envio>(), jaime);
+        Camion camion3 = new Camion(3,new TreeSet<Envio>(),carlos);
+        Camion camion4 = new Camion(4,new TreeSet<Envio>(),sebas);
         camion.getCarga().add(e1);
         camion.getCarga().add(e2);
         camion2.getCarga().add(e1);
@@ -648,7 +651,10 @@ public class Sistema {
         }
         return null;
     }
-    public void agregarEnvioCamion(Camion camion, Envio envio){
-        camion.getCarga().add(envio);
+    public void agregarEnvioCamion(int i, Envio envio){
+        buscarCamion(i).getCarga().add(envio);
+    }
+    public void eliminarEnvioCamion(int i, Envio envio){
+        buscarCamion(i).getCarga().remove(envio);
     }
 }

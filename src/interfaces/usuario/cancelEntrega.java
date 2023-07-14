@@ -50,6 +50,7 @@ public class cancelEntrega {
                     // Se peude usar opcional si se quiere ingresar por el teclado el id
                     //int Id= Integer.parseInt(txtIdCancelar.getText());
                     int cboId=Integer.parseInt(cboEnvCancel.getSelectedItem().toString());
+                    int posicion=cboEnvCancel.getSelectedIndex();
                     if(Inicio.sistema.buscarEnvio(cboId)!=null){
                         Envio en= Inicio.sistema.buscarEnvio(cboId);
                         if(en.getEstado()==0){
@@ -69,9 +70,10 @@ public class cancelEntrega {
                                         "\t Descripción:  "+ en.getPaquete().getDetalle()+"\n Si cancela el envio se le generara una multa a pagar en oficina", "Confirmación de cancelación",JOptionPane.YES_NO_OPTION);
                                 if(opcion==0){
                                     Inicio.sistema.removerEnvio(en);
-                                    Mensaje m = new Mensaje(Inicio.sistema.buscarUsuarioCedula("0000000000"), p, "Ha sido multad@ con 5 dolares, porfavor hacercarse a pagar a la oficina", LocalDateTime.now());
+                                    Mensaje m = new Mensaje(Inicio.sistema.buscarUsuarioCedula("0000000000"),p, "Ha sido multad@ con 5 dolares, porfavor hacercarse a pagar a la oficina", LocalDateTime.now());
                                     multas.add(m);
                                     JOptionPane.showMessageDialog(null,"El envio ha sido cancelado"+m.getMensaje());
+                                    cboEnvCancel.remove(posicion);
                                 }else {
                                     JOptionPane.showMessageDialog(null,"El envio no se ha cancelado");
                                 }
@@ -80,7 +82,6 @@ public class cancelEntrega {
 
                     }else {
                         JOptionPane.showMessageDialog(null, "El envio no se a encontrado, porfavor vuelva a intentarlo");
-                        txtIdCancelar.setText("");
                     }
                 }
 
