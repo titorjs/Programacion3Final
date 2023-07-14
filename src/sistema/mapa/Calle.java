@@ -5,7 +5,7 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 
 public class Calle extends DefaultWeightedEdge{
     private String nombre;
-    /** !!! A lo mejor no del 0 al 1, sino solo que sea positivo
+    /**
      *  Valor que va del 0 al 1, representando el porcentaje de congestión
      *  Siendo 1 100% y 0 0%.
      * Se usa para calcular la mejor ruta de la siguiente manera,

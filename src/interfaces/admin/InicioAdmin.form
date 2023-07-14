@@ -520,7 +520,7 @@
                     <item value="Servicio"/>
                     <item value="Pánico"/>
                   </model>
-                  <selectedIndex value="0"/>
+                  <selectedIndex value="-1"/>
                 </properties>
               </component>
               <grid id="7b7a0" binding="reportesServicio" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

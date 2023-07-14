@@ -389,13 +389,35 @@ public class InicioAdmin {
         cboReportesFiltro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean vial = (cboReportesFiltro.getSelectedIndex() == 0);
-                boolean servicio = !vial;
+                int sel = cboReportesFiltro.getSelectedIndex();
+                if ( sel == 2 ){
+                    reportesServicio.setEnabled(false);
+                    reportesServicio.setVisible(false);
+                    reportesVial.setEnabled(false);
+                    reportesVial.setVisible(false);
 
-                reportesServicio.setEnabled(servicio);
-                reportesServicio.setVisible(servicio);
-                reportesVial.setEnabled(vial);
-                reportesVial.setVisible(vial);
+                    DefaultListModel<Reporte> md = new DefaultListModel<>();
+
+                    for (Mensaje r: Inicio.sistema.getMensajes()){
+                        if (r instanceof Reporte){
+                            if (((Reporte)r).isPanico()){
+                                md.addElement((Reporte)r);
+                            }
+                        }
+                    }
+                    if (!md.isEmpty())
+                        listReportes.setModel(md);
+                    else
+                        JOptionPane.showMessageDialog(null, "No hay reportes");
+                } else {
+                    boolean vial = (sel == 0);
+                    boolean servicio = !vial;
+
+                    reportesServicio.setEnabled(servicio);
+                    reportesServicio.setVisible(servicio);
+                    reportesVial.setEnabled(vial);
+                    reportesVial.setVisible(vial);
+                }
             }
         });
         btnReporteVialFiltrar.addActionListener(new ActionListener() {

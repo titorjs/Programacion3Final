@@ -2,6 +2,7 @@ package interfaces.repartidor;
 
 import clases.*;
 import interfaces.Inicio;
+import interfaces.chat.BuscarChats;
 import sistema.mapa.Mapa;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.TreeSet;
 
 public class InicioRepartidor {
     private JPanel InicioRepartidor;
@@ -21,17 +23,13 @@ public class InicioRepartidor {
     private JPanel mapaCanvas;
     private JButton btnAcutalizarCarga;
     private JTextArea txaCarga;
-    private JComboBox cboRuta;
-    private JSpinner spY;
-    private JSpinner spX;
+    private JButton btnChat;
+    private JButton btnTerminarRuta;
     private Mapa m;
     private ArrayList<Direccion> puntos;
+    private ArrayList<Envio> enDom;
 
     public InicioRepartidor(Persona p) {
-        for (Sucursales s : Sucursales.values()) {
-            cboRuta.addItem(s);
-        }
-        cboRuta.setSelectedIndex(-1);
         btnAcutalizarCarga.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,7 +43,7 @@ public class InicioRepartidor {
                     } else {
                         for (Envio envio : c.getCarga()) {
                             txaCarga.append("Paquete " + envio.getId() +
-                                    "\n" + envio.getPaquete());
+                                    "\n" + envio.getPaquete() + "\n\n");
                         }
                     }
                 }
@@ -77,54 +75,101 @@ public class InicioRepartidor {
                 }
             }
         });
-
         btnRuta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Sucursales s = (Sucursales) cboRuta.getSelectedItem();
-                m = Inicio.sistema.buscarMapa(s);
-
-                mapaCanvas.setLayout(new BorderLayout());
-                mapaCanvas.add(m, BorderLayout.CENTER);
-
                 Camion c = Inicio.sistema.buscarCamion(p);
-                puntos = new ArrayList<>();
-                Direccion inicio;
-                float x = Float.parseFloat(spX.getValue().toString()), y = Float.parseFloat(spY.getValue().toString());
-                if (x >= 0 && y >= 0 && x <= 1500 && y <= 1500) {
+                if (c.getCarga().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No hay paquetes cargados");
+                } else {
+                    Sucursal su = (c.getCarga().first()).getSucursalEntrega();
+                    Sucursales s = su.getZona();
+                    m = Inicio.sistema.buscarMapa(s);
+
+                    mapaCanvas.setLayout(new BorderLayout());
+                    mapaCanvas.add(m, BorderLayout.CENTER);
+
+                    puntos = new ArrayList<>();
+                    Direccion inicio;
                     if (c == null) {
                         JOptionPane.showMessageDialog(null, "No está registrado como conductor de uno de los camiones designados");
                     } else {
                         if (c.getCarga().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "No tiene carga asignada en el sistema");
                         } else {
-                            inicio = new Direccion(y, x);
+                            inicio = su.getDireccion();
 
                             for (Envio envio : c.getCarga()) {
                                 puntos.add(envio.getDireccionEntrega());
                             }
+
+                            enDom = new ArrayList<>();
+
+                            for (Envio en : Inicio.sistema.getEnvios()) {
+                                if (en instanceof EnvioRecibidoDomicilio && en.getEstado() == 0) {
+                                    puntos.add(((EnvioRecibidoDomicilio) en).getDireccionRecibida());
+                                    enDom.add(en);
+                                }
+                            }
+
                             m.dibujarMapa();
 
-                            m.imprimirRutaOptima(m.referenciaMasCercana(puntos), inicio);
+                            m.imprimirRutaOptima(m.referenciaMasCercana(puntos), m.referenciaMasCercana(inicio));
                             for (Direccion d : m.referenciaMasCercana(puntos)) {
                                 m.addDotVertex(d, Color.BLACK);
                             }
                             for (Direccion d : puntos) {
-                                m.addDotVertex(d, Color.GREEN);
+                                boolean recibir = false;
+                                for (Envio en : enDom) {
+                                    if (((EnvioRecibidoDomicilio) en).getDireccionRecibida().equals(d)) {
+                                        recibir = true;
+                                        break;
+                                    }
+                                }
+                                if (recibir)
+                                    m.addDotVertex(d, Color.BLUE);
+                                else
+                                    m.addDotVertex(d, Color.RED);
                             }
 
                             m.repaint();
                         }
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ingrese valores de dirección entre 0 y 1500");
                 }
             }
         });
-        cboRuta.addActionListener(new ActionListener() {
+        btnChat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnRuta.setEnabled(true);
+                JFrame este = (JFrame) SwingUtilities.getWindowAncestor(InicioRepartidor);
+                este.setContentPane(new BuscarChats(p).getBuscarChat());
+                este.revalidate();
+            }
+        });
+        btnTerminarRuta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Camion c = Inicio.sistema.buscarCamion(p);
+                if (c.getCarga().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No hay una ruta en curso");
+                } else {
+                    Sucursal su = (c.getCarga().first()).getSucursalEntrega();
+                    Sucursales s = su.getZona();
+
+                    for (Envio en : c.getCarga()) {
+                        en.setEstado(5);
+                    }
+                    c.setCarga(new TreeSet<Envio>());
+
+                    if (!enDom.isEmpty()) {
+                        for (Envio en : enDom) {
+                            en.setEstado(2);
+                        }
+                    }
+                    enDom = new ArrayList<>();
+                    mapaCanvas.setLayout(new BorderLayout());
+                    JOptionPane.showMessageDialog(null, "Paquetes recogidos y entregados!");
+                }
             }
         });
     }
