@@ -167,7 +167,7 @@ public class InicioRepartidor {
                         }
                     }
                     enDom = new ArrayList<>();
-                    mapaCanvas.setLayout(new BorderLayout());
+                    m.limpiarCanvas();
                     JOptionPane.showMessageDialog(null, "Paquetes recogidos y entregados!");
                 }
             }
