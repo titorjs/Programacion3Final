@@ -46,7 +46,6 @@ public class CargarCamiones {
     DefaultListModel<Envio> listModel;
 
     public CargarCamiones(Persona p) {
-        mostrarEnviosADomicilio();
         Inicio.sistema.generarListaEnviosEntrega(2);
         Inicio.sistema.generarListaEnviosSucursal(1);
         Camion camionSucursales = Inicio.sistema.buscarCamion(1);
@@ -60,7 +59,19 @@ public class CargarCamiones {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Envio envioSeleccionado= (Envio) jlEnviosCD.getSelectedValue();
-                mostrarEnviosADomicilio();
+                listaDomicilio.remove(envioSeleccionado);
+                envioSeleccionado.setEstado(4);
+
+                Inicio.sistema.agregarEnvioCamion(4,envioSeleccionado);
+                if (actualizar==1){
+                    mostrarEnviosDomicilioQN();
+                }else if (actualizar==2){
+                    mostrarEnviosDomicilioQS();
+                } else if (actualizar==3) {
+                    mostrarEnviosDomicilioGYE();
+                }else {
+                    mostrarEnviosDomicilioSTD();
+                }
             }
         });
         btnRegresarCD.addActionListener(new ActionListener() {
@@ -75,8 +86,10 @@ public class CargarCamiones {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Envio envioSeleccionado= (Envio) jlEnviosCS.getSelectedValue();
-                listModel.removeElement(envioSeleccionado);
+                envioSeleccionado.setEstado(2);
                 Inicio.sistema.agregarEnvioCamion(3,envioSeleccionado);
+                listaEnvios.remove(envioSeleccionado);
+                listModel.removeAllElements();
                 if (actualizar==1){
                     mostrarEnviosASucursalQN();
                 }else if (actualizar==2){
@@ -99,6 +112,7 @@ public class CargarCamiones {
         btnMostrarEQN.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                listModel.removeAllElements();
                 mostrarEnviosASucursalQN();
                 actualizar=1;
             }
@@ -106,6 +120,7 @@ public class CargarCamiones {
         btnMostrarEQS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                listModel.removeAllElements();
                 mostrarEnviosASucursalQS();
                 actualizar=2;
             }
@@ -113,6 +128,7 @@ public class CargarCamiones {
         btnMostrarEG.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                listModel.removeAllElements();
                 mostrarEnviosASucursalGYE();
                 actualizar=3;
             }
@@ -120,6 +136,7 @@ public class CargarCamiones {
         btnMostrarESTD.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                listModel.removeAllElements();
                 mostrarEnviosASucursalSTD();
                 actualizar=4;
             }
@@ -176,69 +193,39 @@ public class CargarCamiones {
         btnEnviosCargaDomicilioQN.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Sucursal> sucAux = new ArrayList<>();
-                sucAux = Inicio.sistema.getSucursales();
-                for (Envio envio : listaDomicilio) {
-                    if (envio.getSucursalEntrega().equals(sucAux.get(0))) {
-                        listModelD.addElement(envio);
-                    }
-                }
-                jlEnviosCD.setModel(listModelD);
+                listModelD.removeAllElements();
+                mostrarEnviosDomicilioQN();
+                actualizar=1;
             }
         });
         btnEnviosDomicilioQS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Sucursal> sucAux = new ArrayList<>();
-                sucAux = Inicio.sistema.getSucursales();
-                for (Envio envio : listaDomicilio) {
-                    if (envio.getSucursalEntrega().equals(sucAux.get(1))) {
-                        listModelD.addElement(envio);
-                    }
-                }
-                jlEnviosCD.setModel(listModelD);
+                listModelD.removeAllElements();
+                mostrarEnviosDomicilioQS();
+                actualizar=2;
             }
         });
         btnEnviosDomicilioGYE.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Sucursal> sucAux = new ArrayList<>();
-                sucAux = Inicio.sistema.getSucursales();
-                for (Envio envio : listaDomicilio) {
-                    if (envio.getSucursalEntrega().equals(sucAux.get(2))) {
-                        listModelD.addElement(envio);
-                    }
-                }
-                jlEnviosCD.setModel(listModelD);
+                listModelD.removeAllElements();
+                mostrarEnviosDomicilioGYE();
+                actualizar=3;
             }
         });
         btnEnviosSTD.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Sucursal> sucAux = new ArrayList<>();
-                sucAux = Inicio.sistema.getSucursales();
-                for (Envio envio : listaDomicilio) {
-                    if (envio.getSucursalEntrega().equals(sucAux.get(3))) {
-                        listModelD.addElement(envio);
-                    }
-                }
-                jlEnviosCD.setModel(listModelD);
+                listModelD.removeAllElements();
+                mostrarEnviosDescargaSTD();
+                actualizar=4;
             }
         });
     }
 
     public JPanel getCargarCamiones(){
         return cargarCamiones;
-    }
-    public void mostrarEnviosADomicilio(){
-        DefaultListModel<Envio> listModel = new DefaultListModel<>();
-        SortedSet<Envio> envios =Inicio.sistema.getEnvios();
-        for (Envio envio:envios){
-            if (envio.getEstado()==3){
-                listModel.addElement(envio);
-            }
-        }
-        jlEnviosCD.setModel(listModel);
     }
     public void mostrarEnviosASucursalQN(){
         ArrayList<Sucursal> sucAux = new ArrayList<>();
@@ -337,15 +324,43 @@ public class CargarCamiones {
         actualizar=4;
     }
     public void mostrarEnviosDomicilioQN(){
-
+        ArrayList<Sucursal> sucAux = new ArrayList<>();
+        sucAux = Inicio.sistema.getSucursales();
+        for (Envio envio : listaDomicilio) {
+            if (envio.getSucursalEntrega().equals(sucAux.get(0))) {
+                listModelD.addElement(envio);
+            }
+        }
+        jlEnviosCD.setModel(listModelD);
     }
     public void mostrarEnviosDomicilioQS(){
-
+        ArrayList<Sucursal> sucAux = new ArrayList<>();
+        sucAux = Inicio.sistema.getSucursales();
+        for (Envio envio : listaDomicilio) {
+            if (envio.getSucursalEntrega().equals(sucAux.get(1))) {
+                listModelD.addElement(envio);
+            }
+        }
+        jlEnviosCD.setModel(listModelD);
     }
     public void mostrarEnviosDomicilioGYE(){
-
+        ArrayList<Sucursal> sucAux = new ArrayList<>();
+        sucAux = Inicio.sistema.getSucursales();
+        for (Envio envio : listaDomicilio) {
+            if (envio.getSucursalEntrega().equals(sucAux.get(2))) {
+                listModelD.addElement(envio);
+            }
+        }
+        jlEnviosCD.setModel(listModelD);
     }
     public void mostrarEnviosDomicilioSTD(){
-
+        ArrayList<Sucursal> sucAux = new ArrayList<>();
+        sucAux = Inicio.sistema.getSucursales();
+        for (Envio envio : listaDomicilio) {
+            if (envio.getSucursalEntrega().equals(sucAux.get(3))) {
+                listModelD.addElement(envio);
+            }
+        }
+        jlEnviosCD.setModel(listModelD);
     }
 }
